@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/categories', 'CategoryController@index');
+
+Route::get('/licences', 'LicenceController@index');

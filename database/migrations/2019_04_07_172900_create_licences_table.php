@@ -21,7 +21,7 @@ class CreateLicencesTable extends Migration
             $table->date('starts_at');
             $table->date('ends_at');
             $table->boolean('paid');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->timestamps();
             $table->foreign('club_id')->references('id')->on('clubs');
             $table->foreign('category_id')->references('id')->on('categories');
