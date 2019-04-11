@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index() {
         
-        $categories =  Category::all();
+        $categories = Category::retrieveCategoriesForDefaultClub();
         
         return view('categories')->with('categories', $categories);
     }
