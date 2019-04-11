@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Player;
+use App\Note;
 
 class PlayerController extends Controller
 {
@@ -11,7 +12,17 @@ class PlayerController extends Controller
         
         $player = Player::find($id);
         
+        $notes =  Note::whereHas('player',
+            
+            function ($query) use ($id) {
+                
+                $query->where('id', '=', $id);
+            }
+        )
+        ->orderBy('created_at')
+        ->get();
+        
         return view('player')
-                ->with(compact('player'));
+                ->with(compact('player', 'notes'));
     }
 }

@@ -25,4 +25,9 @@ class Coach extends Model
             
             return $coachs;
     }
+    
+    public function getFullName() {
+        
+        return $this->firstname.' '.$this->lastname;
+    }
 }
