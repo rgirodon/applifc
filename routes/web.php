@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/categories', 'CategoryController@index');
 
+Route::get('/coachs', 'CoachController@index');
+
 Route::get('/licences', 'LicenceController@index')->name('licences');
 
 Route::get('/licencesByCategory/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory');
