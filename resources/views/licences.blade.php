@@ -45,7 +45,7 @@
     			
     			<tr>
         			<th>{{ $licence->category->label }}</<th>
-        			<td>{{ $licence->player->lastname }}</<td>
+        			<td><a href="{{ route('player', ['id' => $licence->player->id]) }}">{{ $licence->player->lastname }}</a></<td>
         			<td>{{ $licence->player->firstname }}</<td>
         		</tr>
     			
