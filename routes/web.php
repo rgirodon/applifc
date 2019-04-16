@@ -24,3 +24,9 @@ Route::get('/licences', 'LicenceController@index')->name('licences');
 Route::get('/licencesByCategory/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory');
 
 Route::get('/player/{id}', 'PlayerController@show')->name('player');
+
+Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
+
+Route::get('/entrainement/{id}', 'EntrainementController@show')->name('entrainement');
+
+Route::get('/entrainementsByCoach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');

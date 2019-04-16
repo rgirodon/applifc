@@ -15,7 +15,7 @@ class Category extends Model
     
     public static function retrieveCategoriesForDefaultClub() {
         
-        $categories =  Category::whereHas('club',
+        $categories = Category::whereHas('club',
             
             function ($query) {
                 
