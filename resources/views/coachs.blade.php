@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Categories')
+@section('title', 'Coachs')
 
 @section('header')
 	

@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Entrainement')
+@section('title', 'Convocations')
 
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Entrainement    	
+		{{ $club->name }} - Convocation    	
 	</h1>
 		
 @endsection
@@ -14,11 +14,13 @@
 
 <main>
 	<div class="panel panel-default">
-		<div class="panel-heading">Entrainement</div>
+		<div class="panel-heading">Convocation</div>
         <div class="panel-body"> 
-            <p>Séance planifiée par : {{ $entrainement->coach->getFullName() }}</p>   
-           	<p>Date : {{ $entrainement->date_entrainement }}</p>
-            <p>Commentaires : {!! nl2br($entrainement->comments) !!}</p>
+            <p>Convocation émise par : {{ $convocation->coach->getFullName() }}</p>   
+           	<p>Date de la convocation : {{ $convocation->date_convocation }}</p>
+           	<p>Heure / Lieu : {{ $convocation->heure_lieu }}</p>
+           	<p>Description : {{ $convocation->description }}</p>
+            <p>Commentaires : {!! nl2br($convocation->comments) !!}</p>
         </div>
     </div>
     <div class="panel panel-default">
@@ -33,7 +35,7 @@
             	</thead>
             	<tbody>
             	
-            		@foreach ($entrainement->players as $player)
+            		@foreach ($convocation->players as $player)
             			
             			<tr>
                 			<td>{{ $player->firstname }}</<td>

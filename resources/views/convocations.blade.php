@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Entrainements')
+@section('title', 'Convocations')
 
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Entrainements du mois en cours
+		{{ $club->name }} - Convocations de la semaine à venir
 	
     	<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -13,11 +13,11 @@
             </button>
             <ul class="dropdown-menu">
             	
-            	<li><a href="{{ route('entrainements') }}">Tous les coachs</a></li>
+            	<li><a href="{{ route('convocations') }}">Tous les coachs</a></li>
             	
             	@foreach ($coachs as $coach)
             	
-                <li><a href="{{ route('entrainementsByCoach', ['coachId' => $coach->id]) }}">{{ $coach->getFullName() }}</a></li>
+                <li><a href="{{ route('convocationsByCoach', ['coachId' => $coach->id]) }}">{{ $coach->getFullName() }}</a></li>
                 
                 @endforeach
             </ul>
@@ -36,15 +36,21 @@
     		<tr>
     			<th>Date</th>
     			<th>Coach</th>
+    			<th>Heure / Lieu</th>
+    			<th>Description</th>
+    			<th>Commentaires</th>
     		</tr>
     	</thead>
     	<tbody>
     	
-    		@foreach ($entrainements as $entrainement)
+    		@foreach ($convocations as $convocation)
     			
     			<tr>
-        			<th><a href="{{ route('entrainement', ['id' => $entrainement->id]) }}">{{ $entrainement->date_entrainement }}</a></th>
-        			<td>{{ $entrainement->coach->getFullName() }}</<td>
+        			<th><a href="{{ route('convocation', ['id' => $convocation->id]) }}">{{ $convocation->date_convocation }}</a></th>
+        			<td>{{ $convocation->coach->getFullName() }}</<td>
+        			<td>{{ $convocation->heure_lieu }}</<td>
+        			<td>{{ $convocation->description }}</<td>        			
+        			<td>{!! nl2br($convocation->comments) !!}</<td> 
         		</tr>
     			
     		@endforeach

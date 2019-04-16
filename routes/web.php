@@ -30,3 +30,9 @@ Route::get('/entrainements', 'EntrainementController@index')->name('entrainement
 Route::get('/entrainement/{id}', 'EntrainementController@show')->name('entrainement');
 
 Route::get('/entrainementsByCoach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');
+
+Route::get('/convocations', 'ConvocationController@index')->name('convocations');
+
+Route::get('/convocation/{id}', 'ConvocationController@show')->name('convocation');
+
+Route::get('/convocationsByCoach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
