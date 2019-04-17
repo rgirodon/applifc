@@ -36,3 +36,6 @@ Route::get('/convocations', 'ConvocationController@index')->name('convocations')
 Route::get('/convocation/{id}', 'ConvocationController@show')->name('convocation');
 
 Route::get('/convocationsByCoach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
+
+Route::get('/operations', 'OperationController@index');
+
