@@ -22,7 +22,7 @@
     		@foreach ($operations as $operation)
     			
     			<tr>
-        			<th>{{ $operation->label }}</<th>
+        			<th><a href="{{ route('operation', ['id' => $operation->id]) }}">{{ $operation->label }}</a></<th>
         		</tr>
     			
     		@endforeach
