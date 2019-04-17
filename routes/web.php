@@ -41,5 +41,11 @@ Route::get('/operations', 'OperationController@index');
 
 Route::get('/operation/{id}', 'OperationController@show')->name('operation');
 
+Route::get('/invitations', 'InvitationController@index')->name('invitations');
+
+Route::get('/invitationsByCategory/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory');
+
+Route::get('/invitation/{id}', 'InvitationController@show')->name('invitation');
+
 
 
