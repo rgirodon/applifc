@@ -45,7 +45,10 @@ Route::get('/invitations', 'InvitationController@index')->name('invitations');
 
 Route::get('/invitationsByCategory/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory');
 
-Route::get('/invitation/{id}', 'InvitationController@show')->name('invitation');
+Route::get('/invitation/{id}', 'InscriptionController@show')->name('invitation');
 
+Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions');
 
+Route::get('/inscriptionsByCategory/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
 
+Route::get('/inscription/{id}', 'InscriptionController@show')->name('inscription');
