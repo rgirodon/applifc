@@ -17,38 +17,38 @@ Route::get('/', function () {
 
 Route::get('/categories', 'CategoryController@index');
 
-Route::get('/coachs', 'CoachController@index');
+Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');
 
-Route::get('/licencesByCategory/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory');
+Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory');
 
-Route::get('/player/{id}', 'PlayerController@show')->name('player');
+Route::get('/players/{id}', 'PlayerController@show')->name('player');
 
 Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
 
-Route::get('/entrainement/{id}', 'EntrainementController@show')->name('entrainement');
+Route::get('/entrainements/{id}', 'EntrainementController@show')->name('entrainement');
 
-Route::get('/entrainementsByCoach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');
+Route::get('/entrainements/coach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');
 
 Route::get('/convocations', 'ConvocationController@index')->name('convocations');
 
-Route::get('/convocation/{id}', 'ConvocationController@show')->name('convocation');
+Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
 
-Route::get('/convocationsByCoach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
+Route::get('/convocations/coach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
 
-Route::get('/operations', 'OperationController@index');
+Route::get('/operations', 'OperationController@index')->name('operations');
 
-Route::get('/operation/{id}', 'OperationController@show')->name('operation');
+Route::get('/operations/{id}', 'OperationController@show')->name('operation');
 
 Route::get('/invitations', 'InvitationController@index')->name('invitations');
 
-Route::get('/invitationsByCategory/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory');
+Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory');
 
-Route::get('/invitation/{id}', 'InvitationController@show')->name('invitation');
+Route::get('/invitations/{id}', 'InvitationController@show')->name('invitation');
 
 Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions');
 
-Route::get('/inscriptionsByCategory/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
+Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
 
-Route::get('/inscription/{id}', 'InscriptionController@show')->name('inscription');
+Route::get('/inscriptions/{id}', 'InscriptionController@show')->name('inscription');
