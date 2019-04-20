@@ -16,7 +16,9 @@ class LicenceController extends Controller
         $licences =  Licence::where([
             ['starts_at', '<=', Carbon::now()],
             ['ends_at', '>', Carbon::now()],
-        ])->get();
+            ['club_id', '=', env('DEFAULT_CLUB_ID')],
+        ])
+        ->get();
         
         return view('licences')
                 ->with(compact('licences', 'categories'));

@@ -14,7 +14,8 @@ class InvitationController extends Controller
         $categories = Category::retrieveCategoriesForDefaultClub();
         
         $invitations =  Invitation::where([
-            ['date_competition', '>=', Carbon::now()->subDay(1)]
+            ['date_competition', '>=', Carbon::now()->subDay(1)],
+            ['club_id', '=', env('DEFAULT_CLUB_ID')],
         ])
         ->orderBy('date_competition')
         ->get();
