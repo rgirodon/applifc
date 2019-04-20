@@ -16,6 +16,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Convocation</div>
         <div class="panel-body"> 
+        	<p>Catégories : {{ $convocation->getJoinedCategories() }}</p>
             <p>Convocation émise par : {{ $convocation->coach->getFullName() }}</p>   
            	<p>Date de la convocation : {{ $convocation->date_convocation }}</p>
            	<p>Heure / Lieu : {{ $convocation->heure_lieu }}</p>

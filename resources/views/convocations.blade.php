@@ -7,6 +7,22 @@
 	<h1>
 		{{ $club->name }} - Convocations de la semaine à venir
 	
+		<span class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            	{{ isset($selectedCategory) ? $selectedCategory->label : 'Filter par Categorie' }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+            	
+            	<li><a href="{{ route('convocations') }}">Toutes les catégories</a></li>
+            	
+            	@foreach ($categories as $category)
+            	
+                <li><a href="{{ route('convocationsByCategory', ['categoryId' => $category->id]) }}">{{ $category->label }}</a></li>
+                
+                @endforeach
+            </ul>
+        </span>
+	
     	<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             	{{ isset($selectedCoach) ? $selectedCoach->getFullName() : 'Filter par Coach' }} <span class="caret"></span>
@@ -35,6 +51,7 @@
     	<thead>
     		<tr>
     			<th>Date</th>
+    			<th>Catégories</th>
     			<th>Coach</th>
     			<th>Heure / Lieu</th>
     			<th>Description</th>
@@ -47,6 +64,7 @@
     			
     			<tr>
         			<th><a href="{{ route('convocation', ['id' => $convocation->id]) }}">{{ $convocation->date_convocation }}</a></th>
+        			<td>{{ $convocation->getJoinedCategories() }}</td>
         			<td>{{ $convocation->coach->getFullName() }}</<td>
         			<td>{{ $convocation->heure_lieu }}</<td>
         			<td>{{ $convocation->description }}</<td>        			

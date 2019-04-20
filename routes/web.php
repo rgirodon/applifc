@@ -31,11 +31,15 @@ Route::get('/entrainements/{id}', 'EntrainementController@show')->name('entraine
 
 Route::get('/entrainements/coach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');
 
+Route::get('/entrainements/category/{categoryId}', 'EntrainementController@findByCategory')->name('entrainementsByCategory');
+
 Route::get('/convocations', 'ConvocationController@index')->name('convocations');
 
 Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
 
 Route::get('/convocations/coach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
+
+Route::get('/convocations/category/{categoryId}', 'ConvocationController@findByCategory')->name('convocationsByCategory');
 
 Route::get('/operations', 'OperationController@index')->name('operations');
 

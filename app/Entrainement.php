@@ -21,7 +21,20 @@ class Entrainement extends Model
         return $this->belongsToMany('App\Player', 'entrainements_players');
     }
     
-    public static function retrieveEntrainementsForDefaultClub($dateDebut, $dateFin, $coachId = false) {
+    public function categories() {
+        
+        return $this->belongsToMany('App\Category', 'entrainements_categories');
+    }
+    
+    public function getJoinedCategories() {
+        
+        return $this->categories()
+        ->select('label')
+        ->get()
+        ->implode('label', ' ');
+    }
+    
+    public static function retrieveEntrainementsForDefaultClub($dateDebut, $dateFin, $coachId = false, $categoryId = false) {
         
         $entrainements = Entrainement::whereHas('club',
             
@@ -38,6 +51,16 @@ class Entrainement extends Model
                                     function ($query) use($coachId) {
                                         
                                         $query->where('id', '=', $coachId);
+                                    });
+        }
+        
+        if ($categoryId) {
+            
+            $entrainements = $entrainements
+                                ->whereHas('categories',
+                                    function ($query) use($categoryId) {
+                                        
+                                        $query->where('categories.id', '=', $categoryId);
                                     });
         }
         

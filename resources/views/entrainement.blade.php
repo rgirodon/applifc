@@ -16,6 +16,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Entrainement</div>
         <div class="panel-body"> 
+        	<p>Catégories : {{ $entrainement->getJoinedCategories() }}</p>
             <p>Séance planifiée par : {{ $entrainement->coach->getFullName() }}</p>   
            	<p>Date : {{ $entrainement->date_entrainement }}</p>
             <p>Commentaires : {!! nl2br($entrainement->comments) !!}</p>

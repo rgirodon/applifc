@@ -7,6 +7,22 @@
 	<h1>
 		{{ $club->name }} - Entrainements du mois en cours
 	
+		<span class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            	{{ isset($selectedCategory) ? $selectedCategory->label : 'Filter par Categorie' }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+            	
+            	<li><a href="{{ route('entrainements') }}">Toutes les catégories</a></li>
+            	
+            	@foreach ($categories as $category)
+            	
+                <li><a href="{{ route('entrainementsByCategory', ['categoryId' => $category->id]) }}">{{ $category->label }}</a></li>
+                
+                @endforeach
+            </ul>
+        </span>
+	
     	<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             	{{ isset($selectedCoach) ? $selectedCoach->getFullName() : 'Filter par Coach' }} <span class="caret"></span>
@@ -35,6 +51,7 @@
     	<thead>
     		<tr>
     			<th>Date</th>
+    			<th>Catégories</th>
     			<th>Coach</th>
     		</tr>
     	</thead>
@@ -44,6 +61,7 @@
     			
     			<tr>
         			<th><a href="{{ route('entrainement', ['id' => $entrainement->id]) }}">{{ $entrainement->date_entrainement }}</a></th>
+        			<td>{{ $entrainement->getJoinedCategories() }}</td>
         			<td>{{ $entrainement->coach->getFullName() }}</<td>
         		</tr>
     			

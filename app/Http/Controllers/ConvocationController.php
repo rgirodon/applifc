@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Convocation;
 use App\Coach;
+use App\Category;
 
 class ConvocationController extends Controller
 {
@@ -19,7 +20,9 @@ class ConvocationController extends Controller
         
         $coachs = Coach::retrieveCoachsForDefaultClub();
         
-        return view('convocations')->with(compact('convocations', 'coachs'));
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        return view('convocations')->with(compact('convocations', 'coachs', 'categories'));
     }
     
     public function show($id) {
@@ -36,12 +39,31 @@ class ConvocationController extends Controller
         
         $dateFin = Carbon::now()->addWeek(2);
         
-        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId);
+        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId, false);
         
         $selectedCoach = Coach::find($coachId);
         
         $coachs = Coach::retrieveCoachsForDefaultClub();
         
-        return view('convocations')->with(compact('convocations', 'coachs', 'selectedCoach'));
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        return view('convocations')->with(compact('convocations', 'coachs', 'selectedCoach', 'categories'));
+    }
+    
+    public function findByCategory($categoryId) {
+        
+        $dateDebut = Carbon::now()->subWeek(2);
+        
+        $dateFin = Carbon::now()->addWeek(2);
+        
+        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, false, $categoryId);
+        
+        $coachs = Coach::retrieveCoachsForDefaultClub();
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        $selectedCategory = Category::find($categoryId);
+        
+        return view('convocations')->with(compact('convocations', 'coachs', 'categories', 'selectedCategory'));
     }
 }

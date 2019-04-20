@@ -21,7 +21,20 @@ class Convocation extends Model
         return $this->belongsToMany('App\Player', 'convocations_players');
     }
     
-    public static function retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId = false) {
+    public function categories() {
+        
+        return $this->belongsToMany('App\Category', 'convocations_categories');
+    }
+    
+    public function getJoinedCategories() {
+        
+        return $this->categories()
+        ->select('label')
+        ->get()
+        ->implode('label', ' ');
+    }
+    
+    public static function retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId = false, $categoryId = false) {
         
         $convocations = Convocation::whereHas('club',
             
@@ -38,6 +51,16 @@ class Convocation extends Model
                                     function ($query) use($coachId) {
                                         
                                         $query->where('id', '=', $coachId);
+                                    });
+        }
+        
+        if ($categoryId) {
+            
+            $convocations = $convocations
+                                ->whereHas('categories',
+                                    function ($query) use($categoryId) {
+                                        
+                                        $query->where('categories.id', '=', $categoryId);
                                     });
         }
         
