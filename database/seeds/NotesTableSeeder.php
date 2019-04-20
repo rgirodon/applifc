@@ -16,7 +16,6 @@ class NotesTableSeeder extends Seeder
         DB::table('notes')->insert([
             [
                 'id' => 1,
-                'club_id' => 1,
                 'coach_id' => 3,
                 'player_id' => 1,
                 'title' => 'Observation Entrainement 11/04/2019',
@@ -26,7 +25,6 @@ class NotesTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'club_id' => 1,
                 'coach_id' => 2,
                 'player_id' => 2,
                 'title' => 'Observation Entrainement 10/04/2019',
