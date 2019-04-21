@@ -4,7 +4,7 @@
 
 @section('header')
 	
-	<h1>{{ $club->name }} - Coachs</h1>
+	<h1>{{ $club->name }} - Dirigeants</h1>
 		
 @endsection
 

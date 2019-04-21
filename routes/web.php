@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/categories', 'CategoryController@index');
 
 Route::get('/coachs', 'CoachController@index')->name('coachs');
@@ -54,3 +56,6 @@ Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions')
 Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
 
 Route::get('/inscriptions/{id}', 'InscriptionController@show')->name('inscription');
+
+Auth::routes();
+

@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'coachs',
     ],
 
     /*
@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'coachs',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'coachs',
         ],
     ],
 
@@ -65,15 +65,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'coachs' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+            'model' => App\Coach::class,
+        ]
     ],
 
     /*
@@ -92,11 +87,10 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
+        'coachs' => [
+            'provider' => 'coachs',
+            'table' => 'coach_password_resets',
             'expire' => 60,
-        ],
-    ],
-
+        ]
+    ]
 ];
