@@ -12,7 +12,7 @@ class EntrainementController extends Controller
 {
     public function index() {
         
-        $dateDebut = Carbon::now()->subWeek(2);
+        $dateDebut = Carbon::now()->subDay(1);
         
         $dateFin = Carbon::now()->addWeek(2);
         
@@ -35,7 +35,7 @@ class EntrainementController extends Controller
     
     public function findByCoach($coachId) {
         
-        $dateDebut = Carbon::now()->subWeek(2);
+        $dateDebut = Carbon::now()->subDay(1);
         
         $dateFin = Carbon::now()->addWeek(2);
         

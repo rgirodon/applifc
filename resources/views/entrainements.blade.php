@@ -5,7 +5,7 @@
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Entrainements du mois en cours
+		{{ $club->name }} - Entrainements à venir
 	
 		<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">

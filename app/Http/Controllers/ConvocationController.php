@@ -52,7 +52,7 @@ class ConvocationController extends Controller
     
     public function findByCategory($categoryId) {
         
-        $dateDebut = Carbon::now()->subWeek(2);
+        $dateDebut = Carbon::now()->subDay(1);
         
         $dateFin = Carbon::now()->addWeek(2);
         
