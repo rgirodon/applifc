@@ -17,7 +17,7 @@
             	
           	</button>
           	
-          	<a class="navbar-brand" href="#">{{ $club->name }}</a>
+          	<a class="navbar-brand" href="{{ route('home') }}">{{ $club->name }}</a>
           	
         </div>
         
