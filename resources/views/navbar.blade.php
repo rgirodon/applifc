@@ -27,6 +27,8 @@
         		
         		@auth
         		
+        			<li class="{{ (Request::segment(1) == 'categories' || Request::segment(1) == 'categories') ? 'active' : null }}"><a href="{{ route('categories') }}">Catégories</a></li>
+        		
         			<li class="{{ (Request::segment(1) == 'licences' || Request::segment(1) == 'players') ? 'active' : null }}"><a href="{{ route('licences') }}">Joueurs</a></li>
 
 					<li class="{{ Request::segment(1) === 'coachs' ? 'active' : null }}"><a href="{{ route('coachs') }}">Dirigeants</a></li>

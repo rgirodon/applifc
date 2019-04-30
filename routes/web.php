@@ -15,7 +15,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/categories', 'CategoryController@index');
+Route::get('/categories', 'CategoryController@index')->name('categories');
 
 Route::get('/coachs', 'CoachController@index')->name('coachs');
 
