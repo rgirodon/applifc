@@ -39,7 +39,7 @@
         			<td>{{ $category->sex }}</<td>
         			<td>{{ $category->starts_at }}</<td>
         			<td>{{ $category->ends_at }}</<td>
-        			<td><a class="buttonLink" href="#" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+        			<td><a class="buttonLink" href="{{ route('category.edit', $category->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
         			<td><a class="buttonLink" href="#" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
         		</tr>
     			

@@ -17,6 +17,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/categories', 'CategoryController@index')->name('categories');
 
+Route::get('/categories/{id}/edit', 'CategoryController@edit')->name('category.edit');
+
+Route::put('/categories/{id}', 'CategoryController@update')->name('category.update');
+
 Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');
