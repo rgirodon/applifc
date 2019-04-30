@@ -4,7 +4,16 @@
 
 @section('header')
 	
-	<h1>{{ $club->name }} - Catégories</h1>
+	<h1>
+		{{ $club->name }} - Catégories
+		
+		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une catégorie</a>
+	
+		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span> Dupliquer toutes les catégories</a>
+		
+		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Editer toutes les catégories</a>
+	
+	</h1>
 		
 @endsection
 
@@ -18,6 +27,7 @@
     			<th>Sexe</th>
     			<th>Né(e) du</th>
     			<th>Au</th>
+    			<th colspan="2">Actions</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -29,6 +39,8 @@
         			<td>{{ $category->sex }}</<td>
         			<td>{{ $category->starts_at }}</<td>
         			<td>{{ $category->ends_at }}</<td>
+        			<td><a class="buttonLink" href="#" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+        			<td><a class="buttonLink" href="#" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
         		</tr>
     			
     		@endforeach
