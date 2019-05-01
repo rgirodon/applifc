@@ -7,10 +7,8 @@
 	<h1>
 		{{ $club->name }} - Catégories
 		
-		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une catégorie</a>
+		<a class="btn btn-default" href="{{ route('category.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une catégorie</a>
 	
-		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span> Dupliquer toutes les catégories</a>
-		
 		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Editer toutes les catégories</a>
 	
 	</h1>

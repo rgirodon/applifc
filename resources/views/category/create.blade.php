@@ -5,7 +5,7 @@
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Edition d'une Catégorie	    	
+		{{ $club->name }} - Création d'une Catégorie	    	
 	</h1>
 		
 @endsection
@@ -27,29 +27,27 @@
         @endif
 		
         <div class="panel-body"> 
-            <form action="{{ route('category.update', $category->id) }}" method="post">
+            <form action="{{ route('category.store') }}" method="post">
             
             	{{ csrf_field() }}
-            
-            	<input name="_method" type="hidden" value="PUT">
-            
+                        
             	<div class="form-group">
                 	<label for="label">Label</label>
-                	<input type="text" class="form-control" id="label" name="label" value="{{ old('label') ? old('label') : $category->label }}">
+                	<input type="text" class="form-control" id="label" name="label" value="{{ old('label') }}">
               	</div>
               	<div class="form-group">
                 	<label for="starts_at">Né du</label>
-                	<input type="date" class="form-control" id="starts_at" name="starts_at" value="{{ old('starts_at') ? old('starts_at') : $category->starts_at }}">
+                	<input type="date" class="form-control" id="starts_at" name="starts_at" value="{{ old('starts_at') }}">
               	</div>
               	<div class="form-group">
                 	<label for="ends_at">Au</label>
-                	<input type="date" class="form-control" id="ends_at" name="ends_at" value="{{ old('ends_at') ? old('ends_at') : $category->ends_at }}">
+                	<input type="date" class="form-control" id="ends_at" name="ends_at" value="{{ old('ends_at') }}">
               	</div>
               	<div class="form-group">
                 	<label for="sex">Sexe</label>
                 	<select class="form-control" id="sex" name="sex">
-                      <option {{ $category->sex == 'h' ? 'selected' : '' }}>h</option>
-                      <option {{ $category->sex == 'f' ? 'selected' : '' }}>f</option>
+                      <option {{ old('sex') == 'h' ? 'selected' : '' }}>h</option>
+                      <option {{ old('sex') == 'f' ? 'selected' : '' }}>f</option>
                     </select>
               	</div>
               	<a class="btn btn-default" href="{{ route('categories') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>

@@ -19,6 +19,10 @@ Route::get('/categories', 'CategoryController@index')->name('categories');
 
 Route::get('/categories/{id}/edit', 'CategoryController@edit')->name('category.edit');
 
+Route::get('/categories/create', 'CategoryController@create')->name('category.create');
+
+Route::post('/categories', 'CategoryController@store')->name('category.store');
+
 Route::put('/categories/{id}', 'CategoryController@update')->name('category.update');
 
 Route::get('/coachs', 'CoachController@index')->name('coachs');

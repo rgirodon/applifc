@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $club = Club::find(env('DEFAULT_CLUB_ID'));
+        $club = Club::findDefaultClub();
         
         View::share('club', $club);
         
