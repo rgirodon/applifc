@@ -17,6 +17,18 @@
 
 @section('content')
 
+@if (session('delete_message_ok'))
+    <div class="alert alert-success">
+    	{{ session('delete_message_ok') }}            
+    </div>
+@endif
+
+@if (session('delete_message_ko'))
+    <div class="alert alert-danger">
+    	{{ session('delete_message_ko') }}            
+    </div>
+@endif
+
 <div>
     <table class="table table-striped table-hover">
     	<thead>
@@ -38,7 +50,19 @@
         			<td>{{ $category->starts_at }}</<td>
         			<td>{{ $category->ends_at }}</<td>
         			<td><a class="buttonLink" href="{{ route('category.edit', $category->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-        			<td><a class="buttonLink" href="#" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+        			<td>
+        				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteCategoryForm_{{ $category->id }}').submit();">
+        					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        				</a>
+        				<form id="deleteCategoryForm_{{ $category->id }}" action="{{ route('category.delete', $category->id) }}" method="post">
+                            
+                            <input type="hidden" name="_method" value="DELETE">
+                            
+                            {{ csrf_field() }}
+                            
+                        </form>
+        			</td>
+        			
         		</tr>
     			
     		@endforeach

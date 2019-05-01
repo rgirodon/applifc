@@ -25,6 +25,8 @@ Route::post('/categories', 'CategoryController@store')->name('category.store');
 
 Route::put('/categories/{id}', 'CategoryController@update')->name('category.update');
 
+Route::delete('/categories/{id}', 'CategoryController@destroy')->name('category.delete');
+
 Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');

@@ -27,6 +27,23 @@ class CategoryController extends Controller
         return view('category.create');
     }
     
+    public function destroy(Request $request, $id) {
+        
+        try {        
+            $category = Category::find($id);
+            
+            $category->delete();
+        
+            $request->session()->flash('delete_message_ok', 'Catégorie supprimée');
+        }
+        catch(\Exception $exception) {        
+            
+            $request->session()->flash('delete_message_ko', 'Impossible de supprimer cette catégorie');
+        }
+        
+        return redirect()->route('categories');
+    }
+    
     public function update(Request $request, $id) {
         
         $request->validate([
