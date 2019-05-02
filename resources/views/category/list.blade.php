@@ -9,7 +9,7 @@
 		
 		<a class="btn btn-default" href="{{ route('category.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une catégorie</a>
 	
-		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Editer toutes les catégories</a>
+		<a class="btn btn-default" href="{{ route('category.editAll') }}" role="button"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Editer toutes les catégories</a>
 	
 	</h1>
 		
@@ -45,10 +45,10 @@
     		@foreach ($categories as $category)
     			
     			<tr>
-        			<th>{{ $category->label }}</<th>
-        			<td>{{ $category->sex }}</<td>
-        			<td>{{ $category->starts_at }}</<td>
-        			<td>{{ $category->ends_at }}</<td>
+        			<th>{{ $category->label }}</th>
+        			<td>{{ $category->sex }}</td>
+        			<td>{{ $category->starts_at }}</td>
+        			<td>{{ $category->ends_at }}</td>
         			<td><a class="buttonLink" href="{{ route('category.edit', $category->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
         			<td>
         				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteCategoryForm_{{ $category->id }}').submit();">

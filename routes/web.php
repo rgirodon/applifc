@@ -19,11 +19,15 @@ Route::get('/categories', 'CategoryController@index')->name('categories');
 
 Route::get('/categories/{id}/edit', 'CategoryController@edit')->name('category.edit');
 
+Route::get('/categories/edit', 'CategoryController@editAll')->name('category.editAll');
+
 Route::get('/categories/create', 'CategoryController@create')->name('category.create');
 
 Route::post('/categories', 'CategoryController@store')->name('category.store');
 
 Route::put('/categories/{id}', 'CategoryController@update')->name('category.update');
+
+Route::put('/categories', 'CategoryController@updateAll')->name('category.updateAll');
 
 Route::delete('/categories/{id}', 'CategoryController@destroy')->name('category.delete');
 

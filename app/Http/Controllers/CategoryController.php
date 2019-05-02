@@ -12,7 +12,7 @@ class CategoryController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
-        return view('categories')->with('categories', $categories);
+        return view('category.list')->with('categories', $categories);
     }
     
     public function edit($id) {
@@ -20,6 +20,13 @@ class CategoryController extends Controller
         $category = Category::find($id);
         
         return view('category.edit')->with('category', $category);
+    }
+    
+    public function editAll() {
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        return view('category.editAll')->with('categories', $categories);
     }
     
     public function create() {
