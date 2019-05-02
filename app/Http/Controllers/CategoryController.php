@@ -75,6 +75,37 @@ class CategoryController extends Controller
         return redirect()->route('categories');
     }
     
+    public function updateAll(Request $request) {
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        foreach ($categories as $category) {
+        
+            $request->validate([
+                'label_'.$category->id => 'bail|required|max:255',
+                'starts_at_'.$category->id => 'bail|nullable|date',
+                'ends_at_'.$category->id => 'bail|nullable|date',
+                'sex_'.$category->id => 'bail|required',
+            ]);
+        }
+        
+        
+        foreach ($categories as $category) {
+            
+            $category->label = $request->input('label_'.$category->id);
+            
+            $category->starts_at = $request->input('starts_at_'.$category->id);
+            
+            $category->ends_at = $request->input('ends_at_'.$category->id);
+            
+            $category->sex = $request->input('sex_'.$category->id);
+            
+            $category->save();
+        }
+        
+        return redirect()->route('categories');
+    }
+    
     public function store(Request $request) {
         
         $request->validate([

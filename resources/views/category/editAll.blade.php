@@ -48,7 +48,7 @@
             			</td>
             			
             			<td>
-            				<select class="form-control" id="sex" name="sex">
+            				<select class="form-control" id="sex_{{ $category->id }}" name="sex_{{ $category->id }}">
                             	<option {{ $category->sex == 'h' ? 'selected' : '' }}>h</option>
                               	<option {{ $category->sex == 'f' ? 'selected' : '' }}>f</option>
                             </select>
