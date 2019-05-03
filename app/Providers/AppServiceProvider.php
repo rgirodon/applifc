@@ -19,8 +19,6 @@ class AppServiceProvider extends ServiceProvider
         $club = Club::findDefaultClub();
         
         View::share('club', $club);
-        
-        
     }
 
     /**
