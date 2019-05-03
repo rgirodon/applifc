@@ -35,6 +35,12 @@ Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');
 
+Route::post('/licences/renew', 'LicenceController@renew')->name('licences.renew');
+
+Route::get('/licences/renew', 'LicenceController@renewDisplay')->name('licences.renewDisplay');
+
+Route::post('/licences/storeAll', 'LicenceController@storeAll')->name('licences.storeAll');
+
 Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory');
 
 Route::get('/players/{id}', 'PlayerController@show')->name('player');
