@@ -23,6 +23,37 @@
         </div>
     </div>
     <div class="panel panel-default">
+    	<div class="panel-heading">Licences</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+            	<thead>
+            		<tr>
+            			<th>Catégorie</th>
+            			<th>Date début</th>
+            			<th>Date fin</th>
+            			<th>Payée</th>
+            			<th>Commentaires</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            	
+            		@foreach ($player->licences as $licence)
+            			
+            			<tr>
+                			<th>{{ $licence->category->label }}</<th>
+                			<td>{{ $licence->starts_at }}</<td>
+                			<td>{{ $licence->ends_at }}</<td> 
+                			<td>{{ $licence->paid ? 'Oui' : 'Non' }}</<td>  
+                			<td>{!! nl2br($licence->comments) !!}</<td>     			
+                		</tr>
+            			
+            		@endforeach
+            	
+            	</tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
     	<div class="panel-heading">Notes</div>
         <div class="panel-body">
             <table class="table table-striped">
