@@ -8333,6 +8333,10 @@ button.close {
   }
 }
 
+.navbar-brand img {
+  height: 100%;
+}
+
 .buttonLink {
   color: #636b6f;
 }

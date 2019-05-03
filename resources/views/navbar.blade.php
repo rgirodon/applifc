@@ -16,8 +16,13 @@
             	<span class="icon-bar"></span>
             	
           	</button>
-          	
-          	<a class="navbar-brand" href="{{ route('home') }}">{{ $club->name }}</a>
+
+
+			@if ($club->logo)
+          		<a class="navbar-brand" href="{{ route('home') }}"><img src="/images/clubs/{{ $club->logo }}"></a>
+			@else
+				<a class="navbar-brand" href="{{ route('home') }}">{{ $club->name }}</a>
+			@endif
           	
         </div>
         
