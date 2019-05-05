@@ -12,6 +12,12 @@
 
 @section('content')
 
+@if (session('delete_message_ok'))
+    <div class="alert alert-success">
+    	{{ session('delete_message_ok') }}            
+    </div>
+@endif
+
 <main>
 	<div class="panel panel-default">
 		<div class="panel-heading">Identité</div>
@@ -23,7 +29,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-    	<div class="panel-heading">Licences</div>
+    	<div class="panel-heading">
+    		Licences
+    		<a class="btn btn-default" href="{{ route('licence.create', $player->id) }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une licence</a>
+    	</div>
         <div class="panel-body">
             <table class="table table-striped">
             	<thead>
@@ -33,6 +42,7 @@
             			<th>Date fin</th>
             			<th>Payée</th>
             			<th>Commentaires</th>
+            			<th colspan="2">Actions</th>
             		</tr>
             	</thead>
             	<tbody>
@@ -44,7 +54,20 @@
                 			<td>{{ $licence->starts_at }}</<td>
                 			<td>{{ $licence->ends_at }}</<td> 
                 			<td>{{ $licence->paid ? 'Oui' : 'Non' }}</<td>  
-                			<td>{!! nl2br($licence->comments) !!}</<td>     			
+                			<td>{!! nl2br($licence->comments) !!}</<td> 
+                			<td><a class="buttonLink" href="{{ route('licence.edit', $licence->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                			<td>
+                				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteLicenceForm_{{ $licence->id }}').submit();">
+                					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                				</a>
+                				<form id="deleteLicenceForm_{{ $licence->id }}" action="{{ route('licence.delete', $licence->id) }}" method="post">
+                                    
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
+                                    {{ csrf_field() }}
+                                    
+                                </form>
+                			</td>    			
                 		</tr>
             			
             		@endforeach

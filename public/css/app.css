@@ -8341,3 +8341,8 @@ button.close {
   color: #636b6f;
 }
 
+footer img {
+  display: block;
+  margin: auto;
+}
+

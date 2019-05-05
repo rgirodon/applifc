@@ -22,7 +22,7 @@ class PlayerController extends Controller
         ->orderBy('created_at')
         ->get();
         
-        return view('player')
+        return view('player.view')
                 ->with(compact('player', 'notes'));
     }
 }

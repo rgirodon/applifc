@@ -35,6 +35,16 @@ Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');
 
+Route::get('/licences/{playerId}/create', 'LicenceController@create')->name('licence.create');
+
+Route::post('/licences', 'LicenceController@store')->name('licence.store');
+
+Route::get('/licences/{id}/edit', 'LicenceController@edit')->name('licence.edit');
+
+Route::put('/licences/{id}', 'LicenceController@update')->name('licence.update');
+
+Route::delete('/licences/{id}', 'LicenceController@destroy')->name('licence.delete');
+
 Route::post('/licences/renew', 'LicenceController@renew')->name('licences.renew');
 
 Route::get('/licences/renew', 'LicenceController@renewDisplay')->name('licences.renewDisplay');

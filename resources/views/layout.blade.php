@@ -16,6 +16,10 @@
             @yield('content')                       
         </main>
         
+        <footer>
+        	<img src="/images/clubs/{{ $club->logo }}">        
+        </footer>
+        
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
