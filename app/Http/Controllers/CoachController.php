@@ -14,4 +14,13 @@ class CoachController extends Controller
         
         return view('coachs')->with('coachs', $coachs);
     }
+
+
+public function show($id) {
+
+    $coach = Coach::find($id);
+
+    return view('coach')
+            ->with(compact('coach'));
+}
 }

@@ -55,6 +55,8 @@ Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory'
 
 Route::get('/players/{id}', 'PlayerController@show')->name('player');
 
+Route::get('/coachs/{id}', 'CoachController@show')->name('coach');
+
 Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
 
 Route::get('/entrainements/{id}', 'EntrainementController@show')->name('entrainement');
