@@ -8350,3 +8350,7 @@ footer img {
   margin: auto;
 }
 
+.panel-body img {
+  max-height: 20vh;
+}
+

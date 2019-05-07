@@ -21,11 +21,22 @@
 <main>
 	<div class="panel panel-default">
 		<div class="panel-heading">Identité</div>
-        <div class="panel-body"> 
+        <div class="panel-body">
+			<div class="media">
+				<div class="media-body">
             <p>Catégorie : {{ $player->getCurrentLicence()->category->label }}</p>   
            	<p>Nom : {{ $player->lastname }}</p>
             <p>Prénom : {{ $player->firstname }}</p>
             <p>Date de naissance : {{ $player->birth }}</p>
+				</div>
+			@if ($player->photos)
+				<div class="media-right media-top">
+					<img src="/images/players/{{ $player->photos }}">
+				</div>
+			@endif
+			</div>
+		</div>
+		</div>
         </div>
     </div>
     <div class="panel panel-default">
