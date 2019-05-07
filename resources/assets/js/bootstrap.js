@@ -11,6 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+    
+    require('jquery-ui/ui/widgets/autocomplete');
 } catch (e) {}
 
 /**

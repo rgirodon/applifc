@@ -25,7 +25,19 @@
         </div>
     </div>
     <div class="panel panel-default">
-    	<div class="panel-heading">Joueurs</div>
+    	<div class="panel-heading panel-btn-bar">
+    	
+    		Joueurs
+ 			
+ 			<form class="form-inline">
+ 			
+                <input type="text" class="form-control" id="addPlayer" placeholder="Ajouter un joueur">
+    
+        		<a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+        		
+    		</form>
+    		
+    	</div>
         <div class="panel-body">
             <table class="table table-striped">
             	<thead>
@@ -50,5 +62,22 @@
         </div>
     </div>
 </main>
+
+<script>
+$(function() {
+
+	let availablePlayers = [
+	    "Romario",
+	    "Bebeto",
+	    "Mazinho",
+	    "Mauro Silva"
+	];
+	  
+	$("#addPlayer").autocomplete({
+
+		source: availablePlayers
+	});
+});
+</script>
 
 @endsection
