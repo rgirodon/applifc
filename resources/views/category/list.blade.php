@@ -61,8 +61,7 @@
                             {{ csrf_field() }}
                             
                         </form>
-        			</td>
-        			
+        			</td>        			
         		</tr>
     			
     		@endforeach

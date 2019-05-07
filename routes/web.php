@@ -69,6 +69,12 @@ Route::get('/convocations', 'ConvocationController@index')->name('convocations')
 
 Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
 
+Route::get('/convocations/create', 'ConvocationController@create')->name('convocation.create');
+
+Route::get('/convocations/{id}/edit', 'ConvocationController@edit')->name('convocation.edit');
+
+Route::delete('/convocations/{id}', 'ConvocationController@destroy')->name('convocation.delete');
+
 Route::get('/convocations/coach/{coachId}', 'ConvocationController@findByCoach')->name('convocationsByCoach');
 
 Route::get('/convocations/category/{categoryId}', 'ConvocationController@findByCategory')->name('convocationsByCategory');
