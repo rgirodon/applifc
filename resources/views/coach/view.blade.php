@@ -15,12 +15,21 @@
 <main>
 	<div class="panel panel-default">
 		<div class="panel-heading">Identité</div>
-        <div class="panel-body">
-           	<p>Nom : {{ $coach->lastname }}</p>
-            <p>Prénom : {{ $coach->firstname }}</p>
-            <p>E-mail : {{ $coach->email }}</p>
-        </div>
-    </div>
+		<div class="panel-body">
+			<div class="media">
+				<div class="media-body">
+					<p>Nom : {{ $coach->lastname }}</p>
+					<p>Prénom : {{ $coach->firstname }}</p>
+					<p>E-mail : {{ $coach->email }}</p>
+				</div>
+				@if ($coach->photo)
+					<div class="media-right media-top">
+						<img src="/images/coachs/{{ $coach->photo }}">
+					</div>
+				@endif
+			</div>
+		</div>
+	</div>
 </main>
 
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterClubsTable extends Migration
+class AlterCoachsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class AlterClubsTable extends Migration
      */
     public function up()
     {
-        Schema::table('clubs', function (Blueprint $table) {
-            $table->string('logo')->nullable();
+        Schema::table('coachs', function (Blueprint $table) {
+            $table->string('photo')->nullable();
         });
     }
+
+
 
     /**
      * Reverse the migrations.
@@ -25,8 +27,8 @@ class AlterClubsTable extends Migration
      */
     public function down()
     {
-        Schema::table('clubs', function (Blueprint $table) {
-            $table->dropColumn(['logo']);
+        Schema::table('coachs', function (Blueprint $table) {
+            $table->dropColumn(['photo']);
         });
     }
 }

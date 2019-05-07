@@ -4,14 +4,21 @@
   }
 }
 
+.media {
+  img {
+    max-height: 20vh;
+  }
+}
+
 .buttonLink {
 
   color : $text-color;
 }
 
-footer img {
-	
-	display: block;
-	
-	margin: auto;
+footer {
+  img {
+    display: block;
+
+    margin: auto;
+  }
 }
