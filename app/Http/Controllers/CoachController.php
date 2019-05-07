@@ -12,6 +12,15 @@ class CoachController extends Controller
         
         $coachs = Coach::retrieveCoachsForDefaultClub();
         
-        return view('coachs')->with('coachs', $coachs);
+        return view('coach.list')->with('coachs', $coachs);
     }
+
+
+public function show($id) {
+
+    $coach = Coach::find($id);
+
+    return view('coach.view')
+            ->with(compact('coach'));
+}
 }

@@ -8337,6 +8337,10 @@ button.close {
   height: 100%;
 }
 
+.media img {
+  max-height: 20vh;
+}
+
 .buttonLink {
   color: #636b6f;
 }
@@ -8344,5 +8348,9 @@ button.close {
 footer img {
   display: block;
   margin: auto;
+}
+
+.panel-body img {
+  max-height: 20vh;
 }
 

@@ -19,14 +19,16 @@
     		</tr>
     	</thead>
     	<tbody>
-    	
+
     		@foreach ($coachs as $coach)
-    			
+
     			<tr>
-        			<td>{{ $coach->firstname }}</<td>
-        			<td>{{ $coach->lastname }}</<td>
+        			<td>{{ $coach->firstname }}</td>
+        			<td>
+						<a href="{{ route('coach', ['id' => $coach->id]) }}">{{ $coach->lastname }}</a>
+					</td>
         		</tr>
-    			
+
     		@endforeach
     	
     	</tbody>
