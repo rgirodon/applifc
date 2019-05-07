@@ -67,11 +67,13 @@ Route::get('/entrainements/category/{categoryId}', 'EntrainementController@findB
 
 Route::get('/convocations', 'ConvocationController@index')->name('convocations');
 
-Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
-
 Route::get('/convocations/create', 'ConvocationController@create')->name('convocation.create');
 
+Route::post('/convocations', 'ConvocationController@store')->name('convocation.store');
+
 Route::get('/convocations/{id}/edit', 'ConvocationController@edit')->name('convocation.edit');
+
+Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
 
 Route::delete('/convocations/{id}', 'ConvocationController@destroy')->name('convocation.delete');
 

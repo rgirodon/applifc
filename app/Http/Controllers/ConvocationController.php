@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Convocation;
 use App\Coach;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ConvocationController extends Controller
 {
@@ -82,5 +83,15 @@ class ConvocationController extends Controller
         }
         
         return redirect()->route('convocations');
+    }
+    
+    public function create() {
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        $coach = Auth::user();
+        
+        return view('convocation.create')
+                ->with(compact('categories', 'coach'));
     }
 }
