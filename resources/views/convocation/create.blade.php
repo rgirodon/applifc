@@ -34,8 +34,8 @@
                 <input name="coach" type="hidden" value="{{ $coach->id }}">        
                         
             	<div class="form-group">
-                	<label for="category">Catégorie</label>
-                	<select class="form-control" id="category" name="category" multiple>
+                	<label for="categoryIds[]">Catégorie</label>
+                	<select class="form-control" id="categoryIds[]" name="categoryIds[]" multiple>
                 	
                 		@foreach ($categories as $category)
                 		

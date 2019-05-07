@@ -8,6 +8,7 @@ use App\Convocation;
 use App\Coach;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Club;
 
 class ConvocationController extends Controller
 {
@@ -93,5 +94,43 @@ class ConvocationController extends Controller
         
         return view('convocation.create')
                 ->with(compact('categories', 'coach'));
+    }
+    
+    public function store(Request $request) {
+        
+        $request->validate([
+            'categoryIds' => 'bail|required|array|min:1',
+            'coach' => 'bail|required|integer',
+            'date_convocation' => 'bail|required|date',
+            'description' => 'bail|required',
+            'heure_lieu' => 'bail|required',
+        ]);
+        
+        $club = Club::findDefaultClub();
+        
+        $coach = Coach::find($request->input('coach'));        
+
+        $convocation = new Convocation();
+        
+        $convocation->club()->associate($club);
+        
+        $convocation->coach()->associate($coach);
+         
+        $convocation->date_convocation = $request->input('date_convocation');
+        
+        $convocation->description = $request->input('description');
+        
+        $convocation->heure_lieu = $request->input('heure_lieu');
+        
+        $convocation->save();
+        
+        $categoryIds = $request->input('categoryIds');
+        
+        foreach ($categoryIds as $categoryId) {
+            
+            $convocation->categories()->attach($categoryId);
+        }
+        
+        return redirect()->route('convocation', $convocation->id);
     }
 }
