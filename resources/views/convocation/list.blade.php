@@ -48,7 +48,17 @@
 
 @section('content')
 
+@if (session('delete_message_ok'))
+    <div class="alert alert-success">
+    	{{ session('delete_message_ok') }}            
+    </div>
+@endif
 
+@if (session('delete_message_ko'))
+    <div class="alert alert-danger">
+    	{{ session('delete_message_ko') }}            
+    </div>
+@endif
 
 <div>
     <table class="table table-striped table-hover">

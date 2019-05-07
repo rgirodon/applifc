@@ -30,7 +30,7 @@ class ConvocationController extends Controller
         $convocation = Convocation::find($id);
         
         return view('convocation.view')
-        ->with(compact('convocation'));
+                ->with(compact('convocation'));
     }
     
     public function findByCoach($coachId) {
@@ -65,5 +65,22 @@ class ConvocationController extends Controller
         $selectedCategory = Category::find($categoryId);
         
         return view('convocation.list')->with(compact('convocations', 'coachs', 'categories', 'selectedCategory'));
+    }
+    
+    public function destroy(Request $request, $id) {
+                
+        try {
+            $convocation = Convocation::find($id);
+            
+            $convocation->delete();
+            
+            $request->session()->flash('delete_message_ok', 'Convocation supprimée');
+        }
+        catch(\Exception $exception) {
+            
+            $request->session()->flash('delete_message_ko', 'Impossible de supprimer cette convocation');
+        }
+        
+        return redirect()->route('convocations');
     }
 }

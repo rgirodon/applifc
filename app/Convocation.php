@@ -26,6 +26,18 @@ class Convocation extends Model
         return $this->belongsToMany('App\Category', 'convocations_categories');
     }
     
+    public static function boot() {
+        
+        parent::boot();
+        
+        Convocation::deleting(function($convocation) {
+            
+            $convocation->players()->detach();
+            
+            $convocation->categories()->detach();
+        });
+    }
+    
     public function getJoinedCategories() {
         
         return $this->categories()
