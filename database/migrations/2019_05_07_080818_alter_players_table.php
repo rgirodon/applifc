@@ -15,7 +15,7 @@ class AlterPlayersTable extends Migration
     {
         {
             Schema::table('players', function (Blueprint $table) {
-                $table->string('photos')->nullable();
+                $table->string('photo')->nullable();
             });
         }
 
@@ -30,7 +30,7 @@ class AlterPlayersTable extends Migration
     {
         {
             Schema::table('players', function (Blueprint $table) {
-                $table->dropColumn(['photos']);
+                $table->dropColumn(['photo']);
             });
         }
     }

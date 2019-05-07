@@ -29,9 +29,9 @@
             <p>Prénom : {{ $player->firstname }}</p>
             <p>Date de naissance : {{ $player->birth }}</p>
 				</div>
-			@if ($player->photos)
+			@if ($player->photo)
 				<div class="media-right media-top">
-					<img src="/images/players/{{ $player->photos }}">
+					<img src="/images/players/{{ $player->photo }}">
 				</div>
 			@endif
 			</div>
