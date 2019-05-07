@@ -22,14 +22,14 @@ class ConvocationController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
-        return view('convocations')->with(compact('convocations', 'coachs', 'categories'));
+        return view('convocation.list')->with(compact('convocations', 'coachs', 'categories'));
     }
     
     public function show($id) {
         
         $convocation = Convocation::find($id);
         
-        return view('convocation')
+        return view('convocation.view')
         ->with(compact('convocation'));
     }
     
@@ -47,7 +47,7 @@ class ConvocationController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
-        return view('convocations')->with(compact('convocations', 'coachs', 'selectedCoach', 'categories'));
+        return view('convocation.list')->with(compact('convocations', 'coachs', 'selectedCoach', 'categories'));
     }
     
     public function findByCategory($categoryId) {
@@ -64,6 +64,6 @@ class ConvocationController extends Controller
         
         $selectedCategory = Category::find($categoryId);
         
-        return view('convocations')->with(compact('convocations', 'coachs', 'categories', 'selectedCategory'));
+        return view('convocation.list')->with(compact('convocations', 'coachs', 'categories', 'selectedCategory'));
     }
 }
