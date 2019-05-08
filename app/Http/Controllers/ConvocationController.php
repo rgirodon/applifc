@@ -162,4 +162,15 @@ class ConvocationController extends Controller
         
         return redirect()->route('convocation', $id);
     }
+    
+    public function deletePlayer(Request $request, $id, $playerId) {
+        
+        $convocation = Convocation::find($id);
+        
+        $player = Player::find($playerId);
+        
+        $convocation->players()->detach($player);
+        
+        return redirect()->route('convocation', $id);
+    }
 }

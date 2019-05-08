@@ -83,6 +83,8 @@ Route::get('/convocations/category/{categoryId}', 'ConvocationController@findByC
 
 Route::post('/convocations/{id}/addPlayer', 'ConvocationController@addPlayer')->name('convocation.addPlayer');
 
+Route::delete('/convocations/{id}/deletePlayer/{playerId}', 'ConvocationController@deletePlayer')->name('convocation.deletePlayer');
+
 Route::get('/operations', 'OperationController@index')->name('operations');
 
 Route::get('/operations/{id}', 'OperationController@show')->name('operation');

@@ -61,6 +61,9 @@
             		<tr>
             			<th>Prénom</th>
             			<th>Nom</th>
+            			@auth
+            				<th>Actions</th>
+            			@endauth
             		</tr>
             	</thead>
             	<tbody>
@@ -70,6 +73,20 @@
             			<tr>
                 			<td>{{ $player->firstname }}</<td>
                 			<td>{{ $player->lastname }}</<td>
+                			@auth
+                			<td>
+                				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteConvocationPlayerForm_{{ $player->id }}').submit();">
+                					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                				</a>
+                				<form id="deleteConvocationPlayerForm_{{ $player->id }}" action="{{ route('convocation.deletePlayer', ['id' => $convocation->id, 'playerId' => $player->id]) }}" method="post">
+                                    
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
+                                    {{ csrf_field() }}
+                                    
+                                </form>
+                			</td>
+                			@endauth
                 		</tr>
             			
             		@endforeach
