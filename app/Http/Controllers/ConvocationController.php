@@ -9,6 +9,7 @@ use App\Coach;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Club;
+use App\Player;
 
 class ConvocationController extends Controller
 {
@@ -132,5 +133,33 @@ class ConvocationController extends Controller
         }
         
         return redirect()->route('convocation', $convocation->id);
+    }
+    
+    public function addPlayer(Request $request, $id) {
+        
+        $request->validate([
+            'playerId' => 'bail|required|integer'
+        ]);
+        
+        $playerId = $request->input('playerId');
+                
+        $alreadyExistingConvocation = Convocation::where('id', '=', $id)
+                                                    ->whereHas('players',
+                                                        function ($query) use($playerId) {
+                                                                    
+                                                            $query->where('players.id', '=', $playerId);
+                                                                })
+                                                    ->get();
+        
+         if ($alreadyExistingConvocation->isEmpty()) {
+        
+            $convocation = Convocation::find($id);
+        
+            $player = Player::find($playerId);
+            
+            $convocation->players()->attach($player);
+        }
+        
+        return redirect()->route('convocation', $id);
     }
 }

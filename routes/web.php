@@ -81,6 +81,8 @@ Route::get('/convocations/coach/{coachId}', 'ConvocationController@findByCoach')
 
 Route::get('/convocations/category/{categoryId}', 'ConvocationController@findByCategory')->name('convocationsByCategory');
 
+Route::post('/convocations/{id}/addPlayer', 'ConvocationController@addPlayer')->name('convocation.addPlayer');
+
 Route::get('/operations', 'OperationController@index')->name('operations');
 
 Route::get('/operations/{id}', 'OperationController@show')->name('operation');

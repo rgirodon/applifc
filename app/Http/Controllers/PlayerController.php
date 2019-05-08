@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Player;
 use App\Note;
+use Illuminate\Http\Response;
 
 class PlayerController extends Controller
 {
@@ -24,5 +25,27 @@ class PlayerController extends Controller
         
         return view('player.view')
                 ->with(compact('player', 'notes'));
+    }
+    
+    public function search(Request $request) {
+        
+        $term = $request->input('term');
+        
+        $players = Player::where('firstname', 'like', '%'.$term.'%')
+                            ->orWhere('lastname','like', '%'.$term.'%')
+                            ->get();
+        
+        $playersForJson = [];                    
+                            
+        foreach ($players as $player) {
+            
+            $playersForJson[] = [
+                'id' => $player->id,
+                'value' => $player->getCurrentLicence()->category->label.' - '.$player->getFullName(),
+                'label' => $player->getCurrentLicence()->category->label.' - '.$player->getFullName()
+            ];
+        }
+                            
+        return response()->json($playersForJson);
     }
 }
