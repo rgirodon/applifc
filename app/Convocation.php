@@ -46,6 +46,24 @@ class Convocation extends Model
         ->implode('label', ' ');
     }
     
+    public function isForCategory($categoryId) {
+        
+        $result = false;
+        
+        $categories = $this->categories()->get();
+        
+        foreach($categories as $category) {
+            
+            if ($category->id == $categoryId) {
+                
+                $result = true;
+                break;
+            }
+        }
+        
+        return $result;
+    }
+    
     public static function retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId = false, $categoryId = false) {
         
         $convocations = Convocation::whereHas('club',

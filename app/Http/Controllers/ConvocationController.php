@@ -97,6 +97,59 @@ class ConvocationController extends Controller
                 ->with(compact('categories', 'coach'));
     }
     
+    public function edit($id) {
+        
+        $convocation = Convocation::find($id);
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        $coach = Auth::user();
+        
+        return view('convocation.edit')
+                ->with(compact('convocation', 'categories', 'coach'));
+    }
+    
+    public function update(Request $request, $id) {
+        
+        $request->validate([
+            'categoryIds' => 'bail|required|array|min:1',
+            'coach' => 'bail|required|integer',
+            'date_convocation' => 'bail|required|date',
+            'description' => 'bail|required',
+            'heure_lieu' => 'bail|required',
+        ]);
+        
+        $coach = Coach::find($request->input('coach'));
+        
+        $convocation = Convocation::find($id);
+        
+        $convocation->coach()->associate($coach);
+        
+        $convocation->date_convocation = $request->input('date_convocation');
+        
+        $convocation->description = $request->input('description');
+        
+        $convocation->heure_lieu = $request->input('heure_lieu');
+        
+        $convocation->save();
+                
+        $categories = $convocation->categories()->get();
+         
+        foreach($categories as $category) {
+        
+            $convocation->categories()->detach($category);
+        }
+        
+        $categoryIds = $request->input('categoryIds');
+        
+        foreach ($categoryIds as $categoryId) {
+            
+            $convocation->categories()->attach($categoryId);
+        }
+        
+        return redirect()->route('convocation', $convocation->id);
+    }
+    
     public function store(Request $request) {
         
         $request->validate([

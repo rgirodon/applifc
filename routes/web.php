@@ -73,6 +73,8 @@ Route::post('/convocations', 'ConvocationController@store')->name('convocation.s
 
 Route::get('/convocations/{id}/edit', 'ConvocationController@edit')->name('convocation.edit');
 
+Route::put('/convocations/{id}', 'ConvocationController@update')->name('convocation.update');
+
 Route::get('/convocations/{id}', 'ConvocationController@show')->name('convocation');
 
 Route::delete('/convocations/{id}', 'ConvocationController@destroy')->name('convocation.delete');
