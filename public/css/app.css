@@ -8354,3 +8354,9 @@ footer img {
   max-height: 20vh;
 }
 
+.btn-default {
+  color: #636b6f;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
