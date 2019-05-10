@@ -43,7 +43,7 @@
 
 					<th>{{ $coach->club_id }}</th>
 					<td>{{ $coach->firstname }}</td>
-					<td>{{ $coach->lastname }}</td>
+					<td><a href="{{ route('coach', ['id' => $coach->id]) }}">{{ $coach->lastname }}</a></td>
 					<td>{{ $coach->email }}</td>
 					<td><a class="buttonLink" href="{{ route('coach.edit', $coach->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
 					<td>
