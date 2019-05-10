@@ -31,6 +31,16 @@ Route::put('/categories', 'CategoryController@updateAll')->name('category.update
 
 Route::delete('/categories/{id}', 'CategoryController@destroy')->name('category.delete');
 
+Route::get('/coachs/{id}/edit', 'CoachController@edit')->name('coach.edit');
+
+Route::get('/coachs/create', 'CoachController@create')->name('coach.create');
+
+Route::post('/coachs', 'CoachController@store')->name('coach.store');
+
+Route::put('/coachs/{id}', 'CoachController@update')->name('coach.update');
+
+Route::delete('/coachs/{id}', 'CoachController@destroy')->name('coach.delete');
+
 Route::get('/coachs', 'CoachController@index')->name('coachs');
 
 Route::get('/licences', 'LicenceController@index')->name('licences');
@@ -55,7 +65,7 @@ Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory'
 
 Route::get('/players/{id}', 'PlayerController@show')->name('player');
 
-Route::get('/coachs/{id}', 'CoachController@show')->name('coach');
+Route::get('/coach/{id}', 'CoachController@show')->name('coach');
 
 Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
 
