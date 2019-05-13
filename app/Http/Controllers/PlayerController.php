@@ -31,6 +31,8 @@ class PlayerController extends Controller
         
         $term = $request->input('term');
         
+        // TODO check player has current licence in default club !
+        
         $players = Player::where('firstname', 'like', '%'.$term.'%')
                             ->orWhere('lastname','like', '%'.$term.'%')
                             ->get();

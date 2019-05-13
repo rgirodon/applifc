@@ -9866,6 +9866,10 @@ button.close {
   height: 100%;
 }
 
+footer img {
+  max-height: 20vh;
+}
+
 .media img {
   max-height: 20vh;
 }

@@ -19,7 +19,7 @@ class Category extends Model
             
             function ($query) {
                 
-                $query->where('id', '=', env('DEFAULT_CLUB_ID'));
+                $query->where('id', '=', Club::findDefaultClubId());
             }
         )->get();
         

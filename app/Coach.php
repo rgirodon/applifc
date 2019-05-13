@@ -24,7 +24,7 @@ class Coach extends Authenticatable
             
             function ($query) {
                 
-                $query->where('id', '=', env('DEFAULT_CLUB_ID'));
+                $query->where('id', '=', Club::findDefaultClubId());
             }
             )->get();
             
@@ -46,10 +46,12 @@ class CustomPasswordResetEmail extends ResetPassword {
     
     public function toMail($notifiable)
     {
+        $url = str_replace('www', Club::findDefaultClub()->server, config('app.url'));
+        
         return (new MailMessage())
         ->subject(env('APP_NAME').' - Réinitialisation de mot de passe')
         ->line('Nous vous envoyons ce mail car nous avons reçu de votre part une demande de réinitialisation de mot de passe.')
-        ->action('Réinitialiser le mot de passe', url(config('app.url') . route('password.reset', $this->token, false)))
+        ->action('Réinitialiser le mot de passe', url($url.route('password.reset', $this->token, false)))
         ->line('Si vous n\'avez pas demandé de réinitialisation de mot de passe, aucune action n\'est requise.');
     }
 }

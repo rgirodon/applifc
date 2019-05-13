@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/players/search', 'PlayerController@search')->name('player.autocomplete.search');
+Route::get('/players/search', 'PlayerController@search')->name('player.autocomplete.search')->middleware('auth');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Inscription;
 use Carbon\Carbon;
+use App\Club;
 
 class InscriptionController extends Controller
 {
@@ -15,7 +16,7 @@ class InscriptionController extends Controller
         
         $inscriptions =  Inscription::where([
             ['date_competition', '>=', Carbon::now()->subDay(1)],
-            ['club_id', '=', env('DEFAULT_CLUB_ID')],
+            ['club_id', '=', Club::findDefaultClubId()],
         ])
         ->orderBy('date_competition')
         ->get();

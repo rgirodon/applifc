@@ -18,6 +18,7 @@ class ClubsTableSeeder extends Seeder
             'name' => 'Côte-Chaude Sportif',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+            'server' => 'ccs',
         ]);
     }
 }

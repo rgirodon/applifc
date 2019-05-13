@@ -19,7 +19,7 @@ class LicenceController extends Controller
         $licences =  Licence::where([
             ['starts_at', '<=', Carbon::now()],
             ['ends_at', '>', Carbon::now()],
-            ['club_id', '=', env('DEFAULT_CLUB_ID')],
+            ['club_id', '=', Club::findDefaultClubId()],
         ])
         ->get();
         

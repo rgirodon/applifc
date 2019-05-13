@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Invitation;
 use Carbon\Carbon;
 use App\Category;
+use App\Club;
 
 class InvitationController extends Controller
 {
@@ -15,7 +16,7 @@ class InvitationController extends Controller
         
         $invitations =  Invitation::where([
             ['date_competition', '>=', Carbon::now()->subDay(1)],
-            ['club_id', '=', env('DEFAULT_CLUB_ID')],
+            ['club_id', '=', Club::findDefaultClubId()],
         ])
         ->orderBy('date_competition')
         ->get();
