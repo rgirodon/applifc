@@ -118,3 +118,11 @@ Auth::routes();
 Route::get('/unauthorized', function() {
     return view('unauthorized');
 });
+
+Route::get('/upload','UploadFileController@index')->name('upload.show');
+    
+Route::post('/upload','UploadFileController@store')->name('upload.store');
+
+
+    
+    
