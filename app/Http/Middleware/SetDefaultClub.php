@@ -19,21 +19,28 @@ class SetDefaultClub
      */
     public function handle($request, Closure $next)
     {
+        $defaultClubId = env('DEFAULT_CLUB_ID');
+        
+        $defaultClub = Club::find($defaultClubId);
+        
         $httpHost = $request->getHttpHost();
+       
+        if (strpos($httpHost, '.') !== false) {
         
-        $splittedHttpHost = explode(".", $httpHost, 2);
-        
-        $server = $splittedHttpHost[0];
-        
-        $defaultClub = Club::where('server', $server)->first();
+            $splittedHttpHost = explode(".", $httpHost, 2);
+            
+            $server = $splittedHttpHost[0];
+            
+            $defaultClub = Club::where('server', $server)->first();
+            
+            $defaultClubId = $defaultClub->id;
+        }
         
         if ($defaultClub) {
             
-            session(['DEFAULT_CLUB_ID' => $defaultClub->id]);
+            session(['DEFAULT_CLUB_ID' => $defaultClubId]);
             
-            $club = Club::findDefaultClub();
-            
-            View::share('club', $club);
+            View::share('club', $defaultClub);
         
             if (!Auth::check()) {
                 
@@ -42,7 +49,7 @@ class SetDefaultClub
             else {
                 $user = Auth::user();
                 
-                if ($user->club->id == $defaultClub->id) {
+                if ($user->club->id == $defaultClubId) {
                     
                     return $next($request);
                 }
