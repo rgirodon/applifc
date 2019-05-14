@@ -5,7 +5,7 @@
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Création d'une licence	    	
+		{{ $club->name }} - Création d'une note
 	</h1>
 		
 @endsection
@@ -33,10 +33,10 @@
         </div>
     </div>
 	<div class="panel panel-default">
-		<div class="panel-heading">Licence</div>
+		<div class="panel-heading">Note</div>
 		
         <div class="panel-body"> 
-            <form action="{{ route('licence.store') }}" method="post">
+            <form action="{{ route('note.store') }}" method="post">
             
             	{{ csrf_field() }}
                         
