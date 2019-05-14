@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Catégorie')
+@section('title', 'Upload')
 
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - Démo d'un upload	    	
+		Démo d'un upload	    	
 	</h1>
 		
 @endsection

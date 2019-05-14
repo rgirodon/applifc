@@ -15,12 +15,8 @@ class UploadFileController extends Controller
     public function store(Request $request) {
         
         $file = $request->file('file');
-        
-        Log::info('File uploadé : '.$file);
-        
+                
         $uploadedFile = $file->storeAs('uploaded', 'downloaded.'.$file->extension(), 'public_uploads');
-        
-        Log::info('File sauvegardé : '.$uploadedFile);
         
         $request->session()->flash('upload_message_ok', 'Upload OK');
         
