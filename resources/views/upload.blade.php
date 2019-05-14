@@ -14,7 +14,7 @@
 
 @if (session('upload_message_ok'))
     <div class="alert alert-success">
-    	Voir le fichier uploadé ici <a href="/{{ $uploadedFile }}" target="_blank">ici</a>           
+    	Voir le fichier uploadé <a href="/{{ $uploadedFile }}" target="_blank">ici</a>           
     </div>
 @endif
 
