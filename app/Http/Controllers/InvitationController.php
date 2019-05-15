@@ -55,4 +55,23 @@ class InvitationController extends Controller
         return view('invitation.view')
                 ->with(compact('invitation'));
     }
+    
+    public function destroy(Request $request, $id) {
+        
+        $invitation = Invitation::find($id);
+            
+        $invitation->delete();
+            
+        $request->session()->flash('delete_message_ok', 'Invitation supprimée');
+        
+        return redirect()->route('invitations');
+    }
+    
+    public function create() {
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        return view('invitation.create')
+                    ->with(compact('categories'));
+    }
 }

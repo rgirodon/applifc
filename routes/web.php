@@ -109,6 +109,8 @@ Route::get('/invitations/{id}/edit', 'InvitationController@edit')->name('invitat
 
 Route::get('/invitations/create', 'InvitationController@create')->name('invitation.create')->middleware('auth');
 
+Route::post('/invitations', 'InvitationController@store')->name('invitation.store')->middleware('auth');
+
 Route::get('/invitations/{id}', 'InvitationController@show')->name('invitation')->middleware('auth');
 
 Route::delete('/invitations/{id}', 'InvitationController@destroy')->name('invitation.delete')->middleware('auth');

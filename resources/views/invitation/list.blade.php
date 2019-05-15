@@ -30,7 +30,11 @@
 
 @section('content')
 
-
+@if (session('delete_message_ok'))
+    <div class="alert alert-success">
+    	{{ session('delete_message_ok') }}            
+    </div>
+@endif
 
 <div>
     <table class="table table-striped table-hover">

@@ -16,6 +16,16 @@ class Invitation extends Model
         return $this->belongsToMany('App\Category', 'invitations_categories');
     }
     
+    public static function boot() {
+        
+        parent::boot();
+        
+        Invitation::deleting(function($invitation) {
+            
+            $invitation->categories()->detach();
+        });
+    }
+    
     public function getJoinedCategories() {
         
         return $this->categories()

@@ -65,7 +65,7 @@
                 	<input type="date" class="form-control" id="ends_at" name="ends_at" value="{{ old('ends_at') ? old('ends_at') : $licence->ends_at }}">
               	</div>
               	<div class="form-group">
-                	<label for="ends_at">Payée</label>
+                	<label for="paid">Payée</label>
                 	<select class="form-control" id="paid" name="paid">
                 		<option value="0" {{ old('paid') 
     											? (old('paid') == '0' ? 'selected' : '')
