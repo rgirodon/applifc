@@ -21,7 +21,7 @@ class InscriptionController extends Controller
         ->orderBy('date_competition')
         ->get();
         
-        return view('inscriptions')
+        return view('inscription.list')
         ->with(compact('inscriptions', 'categories'));
     }
     
@@ -44,7 +44,7 @@ class InscriptionController extends Controller
         ->orderBy('date_competition')
         ->get();
         
-        return view('inscriptions')
+        return view('inscription.list')
                 ->with(compact('inscriptions', 'categories', 'selectedCategory'));
     }
     
@@ -52,7 +52,7 @@ class InscriptionController extends Controller
         
         $inscription = Inscription::find($id);
         
-        return view('inscription')
+        return view('inscription.view')
                 ->with(compact('inscription'));
     }
 }

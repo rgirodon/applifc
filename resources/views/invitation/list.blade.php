@@ -7,6 +7,8 @@
 	<h1>
 		{{ $club->name }} - Invitations à venir
 		
+		<a class="btn btn-default" href="{{ route('invitation.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une invitation</a>
+		
 		<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             	{{ isset($selectedCategory) ? $selectedCategory->label : 'Filter par Categorie' }} <span class="caret"></span>
@@ -39,6 +41,7 @@
     			<th>Date limite réponse</th>
     			<th>Libellé</th>
     			<th>Réponse</th>
+    			<th colspan="2">Actions</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -51,6 +54,19 @@
         			<td>{{ $invitation->date_limite_reponse }}</<td>
         			<td>{{ $invitation->libelle }}</<td>
         			<td>{{ $invitation->reponse }}</<td>
+        			<td><a class="buttonLink" href="{{ route('invitation.edit', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+					<td>
+						<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteInvitationForm_{{ $invitation->id }}').submit();">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</a>
+						<form id="deleteInvitationForm_{{ $invitation->id }}" action="{{ route('invitation.delete', $invitation->id) }}" method="post">
+
+							<input type="hidden" name="_method" value="DELETE">
+
+							{{ csrf_field() }}
+
+						</form>
+					</td>
         		</tr>
     			
     		@endforeach

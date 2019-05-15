@@ -21,7 +21,7 @@ class InvitationController extends Controller
         ->orderBy('date_competition')
         ->get();
         
-        return view('invitations')
+        return view('invitation.list')
                 ->with(compact('invitations', 'categories'));
     }
     
@@ -44,7 +44,7 @@ class InvitationController extends Controller
         ->orderBy('date_competition')
         ->get();
         
-        return view('invitations')
+        return view('invitation.list')
                 ->with(compact('invitations', 'categories', 'selectedCategory'));
     }
     
@@ -52,7 +52,7 @@ class InvitationController extends Controller
         
         $invitation = Invitation::find($id);
         
-        return view('invitation')
+        return view('invitation.view')
                 ->with(compact('invitation'));
     }
 }

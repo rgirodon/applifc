@@ -105,7 +105,13 @@ Route::get('/invitations', 'InvitationController@index')->name('invitations')->m
 
 Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory')->middleware('auth');
 
+Route::get('/invitations/{id}/edit', 'InvitationController@edit')->name('invitation.edit')->middleware('auth');
+
+Route::get('/invitations/create', 'InvitationController@create')->name('invitation.create')->middleware('auth');
+
 Route::get('/invitations/{id}', 'InvitationController@show')->name('invitation')->middleware('auth');
+
+Route::delete('/invitations/{id}', 'InvitationController@destroy')->name('invitation.delete')->middleware('auth');
 
 Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions');
 
