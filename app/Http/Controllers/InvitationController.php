@@ -118,4 +118,63 @@ class InvitationController extends Controller
         
         return redirect()->route('invitation', $invitation->id);
     }
+    
+    public function edit($id) {
+        
+        $invitation = Invitation::find($id);
+        
+        $categories = Category::retrieveCategoriesForDefaultClub();
+        
+        return view('invitation.edit')
+                ->with(compact('invitation', 'categories'));
+    }
+    
+    public function update(Request $request, $id) {
+        
+        $request->validate([
+            'categoryIds' => 'bail|required|array|min:1',
+            'date_competition' => 'bail|required|date',
+            'date_limite_reponse' => 'bail|nullable|date',
+            'libelle' => 'bail|required',
+        ]);
+        
+        $invitation = Invitation::find($id);
+        
+        $invitation->date_competition = $request->input('date_competition');
+        
+        $invitation->date_limite_reponse = $request->input('date_limite_reponse');
+        
+        $invitation->libelle = $request->input('libelle');
+        
+        $invitation->comments = $request->input('comments');
+        
+        $reponse = $request->input('reponse');
+        
+        if ($reponse != '-') {
+            $invitation->reponse = $reponse;
+        }
+        else {
+            $invitation->reponse = null;
+        }
+        
+        $invitation->save();
+        
+        $categoryIds = $request->input('categoryIds');
+        
+        $categories = $invitation->categories()->get();
+        
+        foreach($categories as $category) {
+            
+            $invitation->categories()->detach($category);
+        }
+        
+        $categoryIds = $request->input('categoryIds');
+        
+        foreach ($categoryIds as $categoryId) {
+            
+            $invitation->categories()->attach($categoryId);
+        }
+        
+        return redirect()->route('invitation', $invitation->id);
+    }
 }

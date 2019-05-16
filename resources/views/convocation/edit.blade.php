@@ -63,7 +63,7 @@
               	</div>
               	<div class="form-group">
                 	<label for="comments">Commentaires</label>
-                	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') }}</textarea>
+                	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') ? old('comments') : $convocation->comments }}</textarea>
               	</div>
               	<a class="btn btn-default" href="{{ route('convocations') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
               	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>

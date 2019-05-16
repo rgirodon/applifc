@@ -107,6 +107,8 @@ Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCat
 
 Route::get('/invitations/{id}/edit', 'InvitationController@edit')->name('invitation.edit')->middleware('auth');
 
+Route::put('/invitations/{id}', 'InvitationController@update')->name('invitation.update')->middleware('auth');
+
 Route::get('/invitations/create', 'InvitationController@create')->name('invitation.create')->middleware('auth');
 
 Route::post('/invitations', 'InvitationController@store')->name('invitation.store')->middleware('auth');

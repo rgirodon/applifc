@@ -26,6 +26,24 @@ class Invitation extends Model
         });
     }
     
+    public function isForCategory($categoryId) {
+        
+        $result = false;
+        
+        $categories = $this->categories()->get();
+        
+        foreach($categories as $category) {
+            
+            if ($category->id == $categoryId) {
+                
+                $result = true;
+                break;
+            }
+        }
+        
+        return $result;
+    }
+    
     public function getJoinedCategories() {
         
         return $this->categories()
