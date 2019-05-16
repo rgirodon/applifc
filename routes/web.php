@@ -127,6 +127,16 @@ Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByC
 
 Route::get('/inscriptions/{id}', 'InscriptionController@show')->name('inscription');
 
+Route::get('/notes/{id}/edit', 'NoteController@edit')->name('note.edit')->middleware('auth');
+
+Route::put('/notes/{id}', 'NoteController@update')->name('note.update')->middleware('auth');
+
+Route::get('/notes/{playerId}/create', 'NoteController@create')->name('note.create')->middleware('auth');
+
+Route::post('/notes', 'NoteController@store')->name('note.store')->middleware('auth');
+
+Route::delete('/notes/{id}', 'NoteController@destroy')->name('note.delete')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/unauthorized', function() {
