@@ -26,6 +26,25 @@ class Invitation extends Model
         });
     }
     
+    public function reponseLabel() {
+    
+        $result = '-';
+        
+        if ($this->reponse) {
+            
+            if ($this->reponse == 'y') {
+                
+                $result = 'Oui';
+            }
+            elseif ($this->reponse == 'n') {
+                
+                $result = 'Non';
+            }
+        }
+        
+        return $result;
+    }
+    
     public function isForCategory($categoryId) {
         
         $result = false;

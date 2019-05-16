@@ -21,7 +21,7 @@
            	<p>Libellé : {{ $invitation->libelle }}</p>
             <p>Date limite de réponse : {{ $invitation->date_limite_reponse }}</p>
             <p>Commentaires : {!! $invitation->comments !!}</p>
-            <p>Reponse : {{ $invitation->reponse }}</p>
+            <p>Reponse : {{ $invitation->reponseLabel() }}</p>
         </div>
     </div>
 </main>

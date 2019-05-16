@@ -67,9 +67,9 @@
         													(old('reponse') == '-' ? 'selected' : '') :
         													($invitation->reponse == null ? 'selected' : '') }}>-</option>
                 		
-                		<option value="o" {{ old('reponse') ? 
-                											(old('reponse') == 'o' ? 'selected' : '') :
-        													($invitation->reponse == 'o' ? 'selected' : '') }}>Oui</option>
+                		<option value="y" {{ old('reponse') ? 
+                											(old('reponse') == 'y' ? 'selected' : '') :
+        													($invitation->reponse == 'y' ? 'selected' : '') }}>Oui</option>
     											
                 		<option value="n" {{ old('reponse') ?
                 											(old('reponse') == 'n' ? 'selected' : '') :

@@ -55,18 +55,6 @@
                 	<label for="date_limite_reponse">Date limite de réponse</label>
                 	<input type="date" class="form-control" id="date_limite_reponse" name="date_limite_reponse" value="{{ old('date_limite_reponse') }}">
               	</div>
-<!--               	<div class="form-group"> -->
-<!--                 	<label for="reponse">Réponse</label> -->
-<!--                 	<select class="form-control" id="reponse" name="reponse"> -->
-                		
-<!--                 		<option value="-">-</option> -->
-                		
-<!--                 		<option value="o" {{ old('reponse') ? (old('reponse') == 'o' ? 'selected' : '') : '' }}>Oui</option> -->
-    											
-<!--                 		<option value="n" {{ old('reponse') ? (old('reponse') == 'n' ? 'selected' : '') : '' }}>Non</option> -->
-
-<!--                 	</select> -->
-<!--               	</div> -->
               	<div class="form-group">
                 	<label for="comments">Commentaires</label>
                 	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') }}</textarea>
