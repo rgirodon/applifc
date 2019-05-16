@@ -88,7 +88,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-    	<div class="panel-heading">Notes</div>
+    	<div class="panel-heading">
+			Notes
+			<a class="btn btn-default" href="{{ route('note.create', $player->id) }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une note</a>
+		</div>
         <div class="panel-body">
             <table class="table table-striped">
             	<thead>
@@ -97,6 +100,7 @@
             			<th>Educateur</th>
             			<th>Titre</th>
             			<th>Contenu</th>
+						<th colspan="2">Actions</th>
             		</tr>
             	</thead>
             	<tbody>
@@ -107,7 +111,20 @@
                 			<th>{{ $note->created_at }}</<th>
                 			<td>{{ $note->coach->getFullName() }}</<td>
                 			<td>{{ $note->title }}</<td>   
-                			<td>{!! nl2br($note->content) !!}</<td>     			
+                			<td>{!! nl2br($note->content) !!}</<td>
+							<td><a class="buttonLink" href="{{ route('note.edit', $note->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+							<td>
+								<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteNoteForm_{{ $note->id }}').submit();">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</a>
+								<form id="deleteNoteForm_{{ $note->id }}" action="{{ route('note.delete', $note->id) }}" method="post">
+
+									<input type="hidden" name="_method" value="DELETE">
+
+									{{ csrf_field() }}
+
+								</form>
+							</td>
                 		</tr>
             			
             		@endforeach
