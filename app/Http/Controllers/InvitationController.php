@@ -62,7 +62,7 @@ class InvitationController extends Controller
             
         $invitation->delete();
             
-        $request->session()->flash('delete_message_ok', 'Invitation supprimée');
+        $request->session()->flash('action_message_ok', 'Invitation supprimée');
         
         return redirect()->route('invitations');
     }
@@ -97,16 +97,7 @@ class InvitationController extends Controller
         $invitation->libelle = $request->input('libelle');
         
         $invitation->comments = $request->input('comments');
-        
-        $reponse = $request->input('reponse');
-        
-        if ($reponse != '-') {
-            $invitation->reponse = $reponse;
-        }
-        else {
-            $invitation->reponse = null;
-        }
-        
+                
         $invitation->save();
         
         $categoryIds = $request->input('categoryIds');
@@ -147,16 +138,7 @@ class InvitationController extends Controller
         $invitation->libelle = $request->input('libelle');
         
         $invitation->comments = $request->input('comments');
-        
-        $reponse = $request->input('reponse');
-        
-        if ($reponse != '-') {
-            $invitation->reponse = $reponse;
-        }
-        else {
-            $invitation->reponse = null;
-        }
-        
+
         $invitation->save();
         
         $categoryIds = $request->input('categoryIds');
@@ -176,5 +158,31 @@ class InvitationController extends Controller
         }
         
         return redirect()->route('invitation', $invitation->id);
+    }
+    
+    public function refuse(Request $request, $id) {
+        
+        $invitation = Invitation::find($id);
+        
+        $invitation->reponse = 'n';
+        
+        $invitation->save();
+        
+        $request->session()->flash('action_message_ok', 'Invitation refusée');
+        
+        return redirect()->route('invitations');
+    }
+    
+    public function accept(Request $request, $id) {
+        
+        $invitation = Invitation::find($id);
+        
+        $invitation->reponse = 'y';
+        
+        $invitation->save();
+        
+        $request->session()->flash('action_message_ok', 'Invitation acceptée');
+        
+        return redirect()->route('invitations');
     }
 }

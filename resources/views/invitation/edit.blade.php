@@ -60,24 +60,6 @@
                 	<input type="date" class="form-control" id="date_limite_reponse" name="date_limite_reponse" value="{{ old('date_limite_reponse') ? old('date_limite_reponse') : $invitation->date_limite_reponse }}">
               	</div>
               	<div class="form-group">
-                	<label for="reponse">Réponse</label>
-                	<select class="form-control" id="reponse" name="reponse">
-                		
-                		<option value="-" {{ old('reponse') ? 
-        													(old('reponse') == '-' ? 'selected' : '') :
-        													($invitation->reponse == null ? 'selected' : '') }}>-</option>
-                		
-                		<option value="y" {{ old('reponse') ? 
-                											(old('reponse') == 'y' ? 'selected' : '') :
-        													($invitation->reponse == 'y' ? 'selected' : '') }}>Oui</option>
-    											
-                		<option value="n" {{ old('reponse') ?
-                											(old('reponse') == 'n' ? 'selected' : '') :
-        													($invitation->reponse == 'n' ? 'selected' : '') }}>Non</option>
-
-                	</select>
-              	</div>
-              	<div class="form-group">
                 	<label for="comments">Commentaires</label>
                 	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') ? old('comments') : $invitation->comments }}</textarea>
               	</div>

@@ -30,9 +30,9 @@
 
 @section('content')
 
-@if (session('delete_message_ok'))
+@if (session('action_message_ok'))
     <div class="alert alert-success">
-    	{{ session('delete_message_ok') }}            
+    	{{ session('action_message_ok') }}            
     </div>
 @endif
 
@@ -45,7 +45,7 @@
     			<th>Date limite réponse</th>
     			<th>Libellé</th>
     			<th>Réponse</th>
-    			<th colspan="2">Actions</th>
+    			<th colspan="4">Actions</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -59,6 +59,8 @@
         			<td>{{ $invitation->libelle }}</<td>
         			<td>{{ $invitation->reponseLabel() }}</<td>
         			<td><a class="buttonLink" href="{{ route('invitation.edit', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+        			<td><a class="buttonLink" href="{{ route('invitation.refuse', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a></td>
+        			<td><a class="buttonLink" href="{{ route('invitation.accept', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a></td>
 					<td>
 						<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteInvitationForm_{{ $invitation->id }}').submit();">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

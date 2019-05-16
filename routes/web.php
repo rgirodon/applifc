@@ -107,6 +107,10 @@ Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCat
 
 Route::get('/invitations/{id}/edit', 'InvitationController@edit')->name('invitation.edit')->middleware('auth');
 
+Route::get('/invitations/{id}/refuse', 'InvitationController@refuse')->name('invitation.refuse')->middleware('auth');
+
+Route::get('/invitations/{id}/accept', 'InvitationController@accept')->name('invitation.accept')->middleware('auth');
+
 Route::put('/invitations/{id}', 'InvitationController@update')->name('invitation.update')->middleware('auth');
 
 Route::get('/invitations/create', 'InvitationController@create')->name('invitation.create')->middleware('auth');
