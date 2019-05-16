@@ -7,6 +7,7 @@ use App\Invitation;
 use Carbon\Carbon;
 use App\Category;
 use App\Club;
+use App\Inscription;
 
 class InvitationController extends Controller
 {
@@ -58,11 +59,29 @@ class InvitationController extends Controller
     
     public function destroy(Request $request, $id) {
         
-        $invitation = Invitation::find($id);
+        try {
+            $linkedInscription =  Inscription::where([
+                ['club_id', '=', Club::findDefaultClubId()],
+                ['invitation_id', '=', $id],
+            ])
+            ->first();
             
-        $invitation->delete();
+            if (!$linkedInscription) {
             
-        $request->session()->flash('action_message_ok', 'Invitation supprimée');
+                $invitation = Invitation::find($id);
+                    
+                $invitation->delete();
+                    
+                $request->session()->flash('action_message_ok', 'Invitation supprimée');
+            }
+            else {
+                $request->session()->flash('action_message_ko', 'Impossible de supprimer cette invitation');
+            }
+        }
+        catch(\Exception $exception) {
+            
+            $request->session()->flash('action_message_ko', 'Impossible de supprimer cette invitation');
+        }
         
         return redirect()->route('invitations');
     }
@@ -168,6 +187,24 @@ class InvitationController extends Controller
         
         $invitation->save();
         
+        $linkedInscription =  Inscription::where([
+            ['club_id', '=', Club::findDefaultClubId()],
+            ['invitation_id', '=', $id],
+        ])
+        ->first();
+        
+        if ($linkedInscription) {
+            
+            $categories = $linkedInscription->categories()->get();
+            
+            foreach($categories as $category) {
+                
+                $linkedInscription->categories()->detach($category);
+            }
+            
+            $linkedInscription->delete();
+        }
+        
         $request->session()->flash('action_message_ok', 'Invitation refusée');
         
         return redirect()->route('invitations');
@@ -180,6 +217,39 @@ class InvitationController extends Controller
         $invitation->reponse = 'y';
         
         $invitation->save();
+        
+        // create linked inscription if it does not exist
+        $linkedInscription =  Inscription::where([
+            ['club_id', '=', Club::findDefaultClubId()],
+            ['invitation_id', '=', $id],
+        ])
+        ->first();
+        
+        if (!$linkedInscription) {
+            
+            $linkedInscription = new Inscription();
+            
+            $club = Club::findDefaultClub();
+            
+            $linkedInscription->club()->associate($club);
+            
+            $linkedInscription->invitation()->associate($invitation);
+            
+            $linkedInscription->date_competition = $invitation->date_competition;
+            
+            $linkedInscription->libelle = $invitation->libelle;
+            
+            $linkedInscription->comments = $invitation->comments;
+            
+            $linkedInscription->save();
+            
+            $categories = $invitation->categories()->get();
+            
+            foreach($categories as $category) {
+                
+                $linkedInscription->categories()->attach($category);
+            }
+        }
         
         $request->session()->flash('action_message_ok', 'Invitation acceptée');
         

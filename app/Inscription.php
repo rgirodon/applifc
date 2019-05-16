@@ -11,6 +11,11 @@ class Inscription extends Model
         return $this->belongsTo('App\Club');
     }
     
+    public function invitation() {
+        
+        return $this->belongsTo('App\Invitation');
+    }
+    
     public function categories() {
         
         return $this->belongsToMany('App\Category', 'inscriptions_categories');

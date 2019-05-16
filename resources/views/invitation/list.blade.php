@@ -36,6 +36,12 @@
     </div>
 @endif
 
+@if (session('action_message_ko'))
+    <div class="alert alert-danger">
+    	{{ session('action_message_ko') }}            
+    </div>
+@endif
+
 <div>
     <table class="table table-striped table-hover">
     	<thead>
