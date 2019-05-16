@@ -74,4 +74,48 @@ class InvitationController extends Controller
         return view('invitation.create')
                     ->with(compact('categories'));
     }
+    
+    public function store(Request $request) {
+        
+        $request->validate([
+            'categoryIds' => 'bail|required|array|min:1',
+            'date_competition' => 'bail|required|date',
+            'date_limite_reponse' => 'bail|nullable|date',
+            'libelle' => 'bail|required',
+        ]);
+        
+        $club = Club::findDefaultClub();
+        
+        $invitation = new Invitation();
+        
+        $invitation->club()->associate($club);
+        
+        $invitation->date_competition = $request->input('date_competition');
+        
+        $invitation->date_limite_reponse = $request->input('date_limite_reponse');
+        
+        $invitation->libelle = $request->input('libelle');
+        
+        $invitation->comments = $request->input('comments');
+        
+        $reponse = $request->input('reponse');
+        
+        if ($reponse != '-') {
+            $invitation->reponse = $reponse;
+        }
+        else {
+            $invitation->reponse = null;
+        }
+        
+        $invitation->save();
+        
+        $categoryIds = $request->input('categoryIds');
+        
+        foreach ($categoryIds as $categoryId) {
+            
+            $invitation->categories()->attach($categoryId);
+        }
+        
+        return redirect()->route('invitation', $invitation->id);
+    }
 }
