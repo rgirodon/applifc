@@ -36,7 +36,7 @@
             	<input name="_method" type="hidden" value="PUT">
 
 				<div class="form-group">
-					<label for="label">Prénom</label>
+					<label for="firstname">Prénom</label>
 					<input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname') ? old('firstname') : $coach->firstname }}">
 				</div>
 

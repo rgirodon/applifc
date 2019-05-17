@@ -43,6 +43,8 @@ Route::delete('/coachs/{id}', 'CoachController@destroy')->name('coach.delete')->
 
 Route::get('/coachs', 'CoachController@index')->name('coachs')->middleware('auth');
 
+Route::get('/coach/{id}', 'CoachController@show')->name('coach')->middleware('auth');
+
 Route::get('/licences', 'LicenceController@index')->name('licences')->middleware('auth');
 
 Route::get('/licences/{playerId}/create', 'LicenceController@create')->name('licence.create')->middleware('auth');
@@ -64,8 +66,6 @@ Route::post('/licences/storeAll', 'LicenceController@storeAll')->name('licences.
 Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory')->middleware('auth');
 
 Route::get('/players/{id}', 'PlayerController@show')->name('player')->middleware('auth');
-
-Route::get('/coach/{id}', 'CoachController@show')->name('coach')->middleware('auth');
 
 Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
 
@@ -99,7 +99,17 @@ Route::delete('/convocations/{id}/deletePlayer/{playerId}', 'ConvocationControll
 
 Route::get('/operations', 'OperationController@index')->name('operations')->middleware('auth');
 
+Route::get('/operations/{id}/edit', 'OperationController@edit')->name('operation.edit')->middleware('auth');
+
+Route::get('/operations/create', 'OperationController@create')->name('operation.create')->middleware('auth');
+
 Route::get('/operations/{id}', 'OperationController@show')->name('operation')->middleware('auth');
+
+Route::delete('/operations/{id}', 'OperationController@destroy')->name('operation.delete')->middleware('auth');
+
+Route::post('/operations', 'OperationController@store')->name('operation.store')->middleware('auth');
+
+Route::put('/operations/{id}', 'OperationController@update')->name('operation.update')->middleware('auth');
 
 Route::get('/invitations', 'InvitationController@index')->name('invitations')->middleware('auth');
 

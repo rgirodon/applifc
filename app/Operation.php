@@ -16,6 +16,21 @@ class Operation extends Model
         return $this->hasMany('App\OperationAction');
     }
     
+    public static function boot() {
+        
+        parent::boot();
+        
+        Operation::deleting(function($operation) {
+            
+            $actions = $operation->actions()->get();
+            
+            foreach($actions as $action) {
+                
+                $action->delete();
+            }
+        });
+    }
+    
     public static function retrieveoperationsForDefaultClub() {
         
         $operations = Operation::whereHas('club',
