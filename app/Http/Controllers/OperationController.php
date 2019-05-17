@@ -11,14 +11,14 @@ class OperationController extends Controller
         
         $operations = Operation::retrieveOperationsForDefaultClub();
         
-        return view('operations')->with('operations', $operations);
+        return view('operation.list')->with('operations', $operations);
     }
     
     public function show($id) {
         
         $operation = Operation::find($id);
         
-        return view('operation')
+        return view('operation.view')
                 ->with(compact('operation'));
     }
 }
