@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Operation;
 use App\Club;
 use App\OperationAction;
+use App\Player;
 
 class OperationController extends Controller
 {
@@ -123,5 +124,36 @@ class OperationController extends Controller
         $operation->save();
         
         return redirect()->route('operations');
+    }
+    
+    public function addAction(Request $request, $id) {
+        
+        $request->validate([
+            'playerId' => 'bail|required|integer'
+        ]);
+        
+        $playerId = $request->input('playerId');
+                
+        $alreadyExistingActions = OperationAction::where([
+            ['operation_id', '=', $id],
+            ['player_id', '=', $playerId]
+            ])->get();
+            
+        if ($alreadyExistingActions->isEmpty()) {
+            
+            $operation = Operation::find($id);
+            
+            $player = Player::find($playerId);
+            
+            $action = new OperationAction();
+            
+            $action->player()->associate($player);
+            
+            $action->operation()->associate($operation);
+            
+            $action->save();
+        }
+        
+        return redirect()->route('operation', $id);
     }
 }

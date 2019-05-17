@@ -26,7 +26,22 @@
         </div>
     </div>
     <div class="panel panel-default">
-    	<div class="panel-heading">Actions Joueurs</div>
+    	<div class="panel-heading panel-btn-bar">
+    	
+    		Actions Joueurs
+    		
+    		<form id='addActionForm' class="form-inline" action="{{ route('operation.addAction', $operation->id) }}" method="post">
+     			
+ 				{{ csrf_field() }}
+ 			
+                <input type="text" class="form-control" id="addAction" placeholder="Ajouter une action joueur">
+                
+                <input type="hidden" name="playerId" id="playerId">
+    
+        		<a class="btn btn-default" id="" href="javascript:void(0)" onclick="$('#addActionForm').submit();" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+        		
+    		</form>
+    	</div>
         <div class="panel-body">
             <table class="table table-striped">
             	<thead>
@@ -71,5 +86,22 @@
         </div>
     </div>
 </main>
+
+<script>
+$(function() {
+
+    $('#addAction').autocomplete({
+    
+    	source: '{{ route('player.autocomplete.search') }}',
+
+    	minLength: 2,
+    	
+      	select: function(event, ui) {
+          	
+        	$('#playerId').val(ui.item.id);
+      	}
+    });
+});
+</script>
 
 @endsection

@@ -117,6 +117,8 @@ Route::get('/actions/{id}/edit', 'OperationController@editAction')->name('action
 
 Route::put('/actions/{id}', 'OperationController@updateAction')->name('action.update')->middleware('auth');
 
+Route::post('/operations/{id}/addAction', 'OperationController@addAction')->name('operation.addAction')->middleware('auth');
+
 Route::get('/invitations', 'InvitationController@index')->name('invitations')->middleware('auth');
 
 Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory')->middleware('auth');

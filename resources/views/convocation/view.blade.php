@@ -97,21 +97,23 @@
     </div>
 </main>
 
-<script>
-$(function() {
-
-    $('#addPlayer').autocomplete({
+@auth
+    <script>
+    $(function() {
     
-    	source: '{{ route('player.autocomplete.search') }}',
-
-    	minLength: 2,
-    	
-      	select: function(event, ui) {
-          	
-        	$('#playerId').val(ui.item.id);
-      	}
+        $('#addPlayer').autocomplete({
+        
+        	source: '{{ route('player.autocomplete.search') }}',
+    
+        	minLength: 2,
+        	
+          	select: function(event, ui) {
+              	
+            	$('#playerId').val(ui.item.id);
+          	}
+        });
     });
-});
-</script>
+    </script>
+@endauth
 
 @endsection
