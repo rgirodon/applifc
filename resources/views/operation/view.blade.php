@@ -12,6 +12,12 @@
 
 @section('content')
 
+@if (session('action_message_ok'))
+    <div class="alert alert-success">
+    	{{ session('action_message_ok') }}            
+    </div>
+@endif
+
 <main>
 	<div class="panel panel-default">
 		<div class="panel-heading">Opération</div>
@@ -30,6 +36,7 @@
             			<th>Catégorie</th>
             			<th>Montant (&euro;)</th>
             			<th>Commentaires</th>
+            			<th colspan="2">Actions</th>
             		</tr>
             	</thead>
             	<tbody>
@@ -42,6 +49,19 @@
                 			<td>{{ $action->player->getCurrentLicence()->category->label }}</<td>
                 			<td>{{ $action->amount }}</<td>
                 			<td>{!! nl2br($action->comments) !!}</<td>
+                			<td><a class="buttonLink" href="{{ route('action.edit', $action->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                			<td>
+                				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteActionForm_{{ $action->id }}').submit();">
+                					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                				</a>
+                				<form id="deleteActionForm_{{ $action->id }}" action="{{ route('action.delete', $action->id) }}" method="post">
+                                    
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
+                                    {{ csrf_field() }}
+                                    
+                                </form>
+                			</td>
                 		</tr>
             			
             		@endforeach

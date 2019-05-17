@@ -111,6 +111,12 @@ Route::post('/operations', 'OperationController@store')->name('operation.store')
 
 Route::put('/operations/{id}', 'OperationController@update')->name('operation.update')->middleware('auth');
 
+Route::delete('/actions/{id}', 'OperationController@destroyAction')->name('action.delete')->middleware('auth');
+
+Route::get('/actions/{id}/edit', 'OperationController@editAction')->name('action.edit')->middleware('auth');
+
+Route::put('/actions/{id}', 'OperationController@updateAction')->name('action.update')->middleware('auth');
+
 Route::get('/invitations', 'InvitationController@index')->name('invitations')->middleware('auth');
 
 Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory')->middleware('auth');

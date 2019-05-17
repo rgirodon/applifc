@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Operation;
 use App\Club;
+use App\OperationAction;
 
 class OperationController extends Controller
 {
@@ -52,6 +53,42 @@ class OperationController extends Controller
         }
         
         return redirect()->route('operations');
+    }
+    
+    public function destroyAction(Request $request, $id)
+    {
+
+        $action = OperationAction::find($id);
+        
+        $action->delete();
+        
+        $request->session()->flash('action_message_ok', 'Action supprimée');
+        
+        return redirect()->route('operation', $action->operation->id);
+    }
+    
+    public function editAction($id)
+    {
+        $action = OperationAction::find($id);
+        
+        return view('action.edit')->with('action', $action);
+    }
+    
+    public function updateAction(Request $request, $id)
+    {
+        $request->validate([
+            'amount' => 'bail|nullable|numeric|min:0'
+        ]);
+        
+        $action = OperationAction::find($id);
+        
+        $action->amount = $request->input('amount');
+        
+        $action->comments = $request->input('comments');
+        
+        $action->save();
+        
+        return redirect()->route('operation', $action->operation->id);
     }
     
     public function store(Request $request)
