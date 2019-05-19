@@ -46,8 +46,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="confirmNewPassword">Confirmer le mot de passe</label>
-					<input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword">
+					<label for="newPassword_confirmation">Confirmer le mot de passe</label>
+					<input type="password" class="form-control" id="newPassword_confirmation" name="newPassword_confirmation">
 				</div>
 
 				<a class="btn btn-default" href="{{ route('home') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>

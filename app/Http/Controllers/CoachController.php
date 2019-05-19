@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Coach;
 use App\Club;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
 
 class CoachController extends Controller
 {
@@ -106,5 +108,38 @@ class CoachController extends Controller
     public function displayChangePassword() {
         
         return view('coach.password');
+    }
+    
+    public function changePassword(Request $request) {
+        
+        $coach = Auth::user();
+        
+        $request->validate([
+            'currentPassword' => 'bail|required',
+            'newPassword' => 'bail|required|confirmed|min:6|max:255',
+        ]);
+        
+        $oldPassword = $coach->password;
+        
+        $newPassword = $request->input('newPassword');
+        
+        if ($oldPassword == $coach->password) {
+            
+            $coach->password = bcrypt($newPassword);
+            
+            $coach->save();
+            
+            $request->session()->flash('action_message_ok', 'Mot de passe changé avec succès');
+            
+            return view('home');
+        }
+        else {
+            $errors = new MessageBag();
+            
+            $errors->add('bad_current_password', 'Mot de passe actuel faux');
+            
+            return redirect()->route('password.change.display', $id)
+                                ->withErrors($errors);
+        }
     }
 }
