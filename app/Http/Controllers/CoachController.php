@@ -102,4 +102,9 @@ class CoachController extends Controller
 
         return redirect()->route('coachs');
     }
+    
+    public function displayChangePassword() {
+        
+        return view('coach.password');
+    }
 }

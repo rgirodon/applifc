@@ -160,3 +160,9 @@ Auth::routes();
 Route::get('/unauthorized', function() {
     return view('unauthorized');
 });
+
+Route::get('/password', 'CoachController@displayChangePassword')->name('password.change.display')->middleware('auth');
+
+Route::put('/password', 'CoachController@changePassword')->name('password.change.store')->middleware('auth');
+
+
