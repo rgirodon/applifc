@@ -68,14 +68,10 @@ Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory'
 Route::get('/players/{id}', 'PlayerController@show')->name('player')->middleware('auth');
 
 Route::get('/entrainements', 'EntrainementController@index')->name('entrainements');
-
 Route::get('/entrainements/{id}', 'EntrainementController@show')->name('entrainement')->middleware('auth');
-
 Route::get('/entrainements/coach/{coachId}', 'EntrainementController@findByCoach')->name('entrainementsByCoach');
-
 Route::get('/entrainements/category/{categoryId}', 'EntrainementController@findByCategory')->name('entrainementsByCategory');
-
-Route::get('/convocations', 'ConvocationController@index')->name('convocations');
+Route::get('/entrainements/create', 'EntrainementController@create')->name('entrainement.create')->middleware('auth');
 
 Route::get('/convocations/create', 'ConvocationController@create')->name('convocation.create')->middleware('auth');
 
@@ -96,6 +92,7 @@ Route::get('/convocations/category/{categoryId}', 'ConvocationController@findByC
 Route::post('/convocations/{id}/addPlayer', 'ConvocationController@addPlayer')->name('convocation.addPlayer')->middleware('auth');
 
 Route::delete('/convocations/{id}/deletePlayer/{playerId}', 'ConvocationController@deletePlayer')->name('convocation.deletePlayer')->middleware('auth');
+
 
 Route::get('/operations', 'OperationController@index')->name('operations')->middleware('auth');
 

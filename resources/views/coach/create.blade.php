@@ -45,6 +45,17 @@
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') }}">
 				</div>
 
+				<div class="panel-body">
+					<form action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
+
+						{{ csrf_field() }}
+
+						<div class="form-group">
+							<label for="file">File</label>
+							<input type="file" class="form-control" id="file" name="file">
+						</div>
+
+
               	<a class="btn btn-default" href="{{ route('coachs') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
               	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
             </form>
