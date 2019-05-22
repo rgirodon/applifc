@@ -25,7 +25,7 @@ class EntrainementController extends Controller
 
         $categories = Category::retrieveCategoriesForDefaultClub();
 
-        return view('entrainement.list')->with(compact('entrainement', 'coachs', 'categories'));
+        return view('entrainement.list')->with(compact('entrainements', 'coachs', 'categories'));
     }
 
     public function show($id) {
@@ -59,7 +59,7 @@ class EntrainementController extends Controller
 
         $dateFin = Carbon::now()->addWeek(2);
 
-        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, $dateFin, false, $categoryId);
+        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, false, $categoryId);
 
         $coachs = Coach::retrieveCoachsForDefaultClub();
 
@@ -67,24 +67,24 @@ class EntrainementController extends Controller
 
         $selectedCategory = Category::find($categoryId);
 
-        return view('entrainement.list')->with(compact('entrainements', 'coachs', 'categories', 'selectedCategory'));
+        return view('entrainement.liste')->with(compact('entrainements', 'coachs', 'categories', 'selectedCategory'));
     }
 
     public function destroy(Request $request, $id) {
 
         try {
-            $entrainement = Convocation::find($id);
+            $entrainement = Entrainement::find($id);
 
             $entrainement->delete();
 
-            $request->session()->flash('delete_message_ok', 'Entrainement supprimée');
+            $request->session()->flash('delete_message_ok', 'Entrainement supprimé');
         }
         catch(\Exception $exception) {
 
-            $request->session()->flash('delete_message_ko', 'Impossible de supprimer cette entrainement');
+            $request->session()->flash('delete_message_ko', 'Impossible de supprimer cet entrainement');
         }
 
-        return redirect()->route('entrainement');
+        return redirect()->route('entrainements');
     }
 
     public function create() {
@@ -99,14 +99,14 @@ class EntrainementController extends Controller
 
     public function edit($id) {
 
-        $convocation = Convocation::find($id);
+        $entrainement = Entrainement::find($id);
 
         $categories = Category::retrieveCategoriesForDefaultClub();
 
         $coach = Auth::user();
 
-        return view('convocation.edit')
-            ->with(compact('convocation', 'categories', 'coach'));
+        return view('entrainement.edit')
+            ->with(compact('entrainement', 'categories', 'coach'));
     }
 
     public function update(Request $request, $id) {
@@ -115,8 +115,6 @@ class EntrainementController extends Controller
             'categoryIds' => 'bail|required|array|min:1',
             'coach' => 'bail|required|integer',
             'date_entrainement' => 'bail|required|date',
-
-
         ]);
 
         $coach = Coach::find($request->input('coach'));
@@ -126,6 +124,8 @@ class EntrainementController extends Controller
         $entrainement->coach()->associate($coach);
 
         $entrainement->date_entrainement = $request->input('date_entrainement');
+
+        $entrainement->comments= $request->input('comments');
 
         $entrainement->save();
 
@@ -152,20 +152,21 @@ class EntrainementController extends Controller
             'categoryIds' => 'bail|required|array|min:1',
             'coach' => 'bail|required|integer',
             'date_entrainement' => 'bail|required|date',
-
         ]);
 
         $club = Club::findDefaultClub();
 
         $coach = Coach::find($request->input('coach'));
 
-        $entrainement = new entrainement();
+        $entrainement = new Entrainement();
 
         $entrainement->club()->associate($club);
 
         $entrainement->coach()->associate($coach);
 
         $entrainement->date_entrainement = $request->input('date_entrainement');
+
+        $entrainement->comments= $request->input('comments');
 
         $entrainement->save();
 
@@ -197,7 +198,7 @@ class EntrainementController extends Controller
 
         if ($alreadyExistingEntrainement->isEmpty()) {
 
-            $entrainement = Convocation::find($id);
+            $entrainement = Entrainement::find($id);
 
             $player = Player::find($playerId);
 

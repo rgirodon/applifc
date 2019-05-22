@@ -27,7 +27,7 @@
 		<div class="panel-heading">Entrainement</div>
 		
         <div class="panel-body"> 
-            <form action="{{ route('entrainement.update', $$entrainement->id) }}" method="post">
+            <form action="{{ route('entrainement.update', $entrainement->id) }}" method="post">
             
             	{{ csrf_field() }}
                         
@@ -50,7 +50,7 @@
                     </select>
               	</div>
               	<div class="form-group">
-                	<label for="date_convocation">Date</label>
+                	<label for="date_entrainement">Date</label>
                 	<input type="date" class="form-control" id="date_entrainement" name="date_entrainement" value="{{ old('date_entrainement') ? old('date_entrainement') : $entrainement->date_entrainement }}">
               	</div>
 
@@ -58,7 +58,7 @@
                 	<label for="comments">Commentaires</label>
                 	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') ? old('comments') : $entrainement->comments }}</textarea>
               	</div>
-              	<a class="btn btn-default" href="{{ route('$entrainements') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
+              	<a class="btn btn-default" href="{{ route('entrainements') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
               	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
             </form>
         </div>

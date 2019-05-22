@@ -130,6 +130,8 @@ class ConvocationController extends Controller
         $convocation->description = $request->input('description');
         
         $convocation->heure_lieu = $request->input('heure_lieu');
+
+        $convocation->comments = $request->input('comments');
         
         $convocation->save();
                 
@@ -173,6 +175,8 @@ class ConvocationController extends Controller
         $convocation->date_convocation = $request->input('date_convocation');
         
         $convocation->description = $request->input('description');
+
+        $convocation->comments = $request->input('comments');
         
         $convocation->heure_lieu = $request->input('heure_lieu');
         
