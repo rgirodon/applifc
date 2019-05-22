@@ -25,6 +25,18 @@ class Entrainement extends Model
         
         return $this->belongsToMany('App\Category', 'entrainements_categories');
     }
+
+    public static function boot() {
+
+        parent::boot();
+
+        Entrainement::deleting(function($entrainement) {
+
+            $entrainement->players()->detach();
+
+            $entrainement->categories()->detach();
+        });
+    }
     
     public function getJoinedCategories() {
         
@@ -32,6 +44,24 @@ class Entrainement extends Model
         ->select('label')
         ->get()
         ->implode('label', ' ');
+    }
+
+    public function isForCategory($categoryId) {
+
+        $result = false;
+
+        $categories = $this->categories()->get();
+
+        foreach($categories as $category) {
+
+            if ($category->id == $categoryId) {
+
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
     }
     
     public static function retrieveEntrainementsForDefaultClub($dateDebut, $dateFin, $coachId = false, $categoryId = false) {
