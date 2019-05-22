@@ -50,7 +50,6 @@
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : $coach->email }}">
 				</div>
 
-
 				<a class="btn btn-default" href="{{ route('coachs') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
 
 				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
