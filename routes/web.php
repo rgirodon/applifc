@@ -72,21 +72,47 @@ Route::put('/actions/{id}', 'OperationController@updateAction')->name('action.up
 Route::post('/operations/{id}/addAction', 'OperationController@addAction')->name('operation.addAction')->middleware('auth');
 
 Route::get('/invitations', 'InvitationController@index')->name('invitations')->middleware('auth');
+
 Route::get('/invitations/category/{categoryId}', 'InvitationController@findByCategory')->name('invitationsByCategory')->middleware('auth');
+
 Route::get('/invitations/{id}/edit', 'InvitationController@edit')->name('invitation.edit')->middleware('auth');
+
 Route::get('/invitations/{id}/refuse', 'InvitationController@refuse')->name('invitation.refuse')->middleware('auth');
+
 Route::get('/invitations/{id}/accept', 'InvitationController@accept')->name('invitation.accept')->middleware('auth');
+
 Route::put('/invitations/{id}', 'InvitationController@update')->name('invitation.update')->middleware('auth');
+
 Route::get('/invitations/create', 'InvitationController@create')->name('invitation.create')->middleware('auth');
+
 Route::post('/invitations', 'InvitationController@store')->name('invitation.store')->middleware('auth');
+
 Route::get('/invitations/{id}', 'InvitationController@show')->name('invitation')->middleware('auth');
+
 Route::delete('/invitations/{id}', 'InvitationController@destroy')->name('invitation.delete')->middleware('auth');
+
 Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions');
-Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
-Route::get('/inscriptions/{id}', 'InscriptionController@show')->name('inscription');
+
+Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory')->middleware('auth');
+
+Route::get('/inscriptions/{id}/edit', 'InscriptionController@edit')->name('inscription.edit')->middleware('auth');
+
+Route::get('/inscriptions/create', 'InscriptionController@create')->name('inscription.create')->middleware('auth');
+
+Route::post('/inscriptions', 'InscriptionController@store')->name('inscription.store')->middleware('auth');
+
+Route::put('/inscriptions/{id}', 'InscriptionController@update')->name('inscription.update')->middleware('auth');
+
+Route::get('/inscriptions/{id}', 'InscriptionController@show')->name('inscription')->middleware('auth');
+
+Route::delete('/inscriptions/{id}', 'InscriptionController@destroy')->name('inscription.delete')->middleware('auth');
+
 Route::get('/notes/{id}/edit', 'NoteController@edit')->name('note.edit')->middleware('auth');
+
 Route::put('/notes/{id}', 'NoteController@update')->name('note.update')->middleware('auth');
+
 Route::get('/notes/{playerId}/create', 'NoteController@create')->name('note.create')->middleware('auth');
+
 Route::post('/notes', 'NoteController@store')->name('note.store')->middleware('auth');
 Route::delete('/notes/{id}', 'NoteController@destroy')->name('note.delete')->middleware('auth');
 
