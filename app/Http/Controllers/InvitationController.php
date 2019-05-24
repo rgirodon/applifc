@@ -160,8 +160,6 @@ class InvitationController extends Controller
 
         $invitation->save();
         
-        $categoryIds = $request->input('categoryIds');
-        
         $categories = $invitation->categories()->get();
         
         foreach($categories as $category) {
