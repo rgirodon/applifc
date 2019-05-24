@@ -61,9 +61,9 @@
     			<tr>
     				<td>{{ $invitation->getJoinedCategories() }}</td>
         			<th><a href="{{ route('invitation', ['id' => $invitation->id]) }}">{{ $invitation->date_competition }}</a></th>
-        			<td>{{ $invitation->date_limite_reponse }}</<td>
-        			<td>{{ $invitation->libelle }}</<td>
-        			<td>{{ $invitation->reponseLabel() }}</<td>
+        			<td>{{ $invitation->date_limite_reponse }}</td>
+        			<td>{{ $invitation->libelle }}</td>
+        			<td>{{ $invitation->reponseLabel() }}</td>
         			<td><a class="buttonLink" href="{{ route('invitation.edit', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
         			<td><a class="buttonLink" href="{{ route('invitation.refuse', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a></td>
         			<td><a class="buttonLink" href="{{ route('invitation.accept', $invitation->id) }}" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a></td>
