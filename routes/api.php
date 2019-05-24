@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/players/search', 'PlayerController@search')->name('player.autocomplete.search');
+
+Route::get('/clubs/default', 'ClubController@default')->name('club.default');
