@@ -25,8 +25,35 @@ class ConvocationController extends Controller
     }
     
     public function api_index() {
+                
+        /*
+         * return {
+            fields: ['date',
+                    'categories',
+                    'coach',
+                    'heure_/_lieu',
+                    'description',
+                    'commentaires']
+        };
+         */
         
-        return $this->retrieveConvocations();
+        $convocationsForJson = [];
+        
+        $convocations = $this->retrieveConvocations();
+        
+        foreach ($convocations as $convocation) {
+            
+            $convocationsForJson[] = [
+                'date' => $convocation->date_convocation,
+                'categories' => $convocation->getJoinedCategories(),
+                'coach' => $convocation->coach->getFullName(),
+                'heure_/_lieu' => $convocation->heure_lieu,
+                'description' => $convocation->description,
+                'commentaires' => $convocation->comments                
+            ];
+        }
+        
+        return response()->json($convocationsForJson);
     }
     
     public function retrieveConvocations() {

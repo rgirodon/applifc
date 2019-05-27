@@ -23,8 +23,21 @@ class InscriptionController extends Controller
     }
     
     public function api_index() {
+
+        $inscriptionsForJson = [];
         
-        return $this->retrieveInscriptions();
+        $inscriptions = $this->retrieveInscriptions();
+        
+        foreach ($inscriptions as $inscription) {
+            
+            $inscriptionsForJson[] = [
+                'date_competition' => $inscription->date_competition,
+                'categories' => $inscription->getJoinedCategories(),
+                'libelle' => $inscription->libelle
+            ];
+        }
+        
+        return response()->json($inscriptionsForJson);
     }
     
     public function retrieveInscriptions() {

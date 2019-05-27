@@ -25,8 +25,21 @@ class EntrainementController extends Controller
     }
     
     public function api_index() {
+
+        $entrainementsForJson = [];
         
-        return $this->retrieveEntrainements();
+        $entrainements = $this->retrieveEntrainements();
+        
+        foreach ($entrainements as $entrainement) {
+            
+            $entrainementsForJson[] = [
+                'date' => $entrainement->date_entrainement,
+                'categories' => $entrainement->getJoinedCategories(),
+                'coach' => $entrainement->coach->getFullName()
+            ];
+        }
+        
+        return response()->json($entrainementsForJson);
     }
     
     public function retrieveEntrainements() {
