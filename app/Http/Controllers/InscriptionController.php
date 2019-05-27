@@ -16,6 +16,19 @@ class InscriptionController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
+        $inscriptions = $this->retrieveInscriptions();
+        
+        return view('inscription.list')
+                ->with(compact('inscriptions', 'categories'));
+    }
+    
+    public function api_index() {
+        
+        return $this->retrieveInscriptions();
+    }
+    
+    public function retrieveInscriptions() {
+        
         $inscriptions =  Inscription::where([
             ['date_competition', '>=', Carbon::now()->subDay(1)],
             ['club_id', '=', Club::findDefaultClubId()],
@@ -23,8 +36,7 @@ class InscriptionController extends Controller
         ->orderBy('date_competition')
         ->get();
         
-        return view('inscription.list')
-        ->with(compact('inscriptions', 'categories'));
+        return $inscriptions;
     }
     
     public function findByCategory($categoryId) {

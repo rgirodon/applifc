@@ -15,17 +15,29 @@ class EntrainementController extends Controller
 {
     public function index() {
 
-        $dateDebut = Carbon::now()->subDay(1);
-
-        $dateFin = Carbon::now()->addWeek(2);
-
-        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, $dateFin);
+        $entrainements = $this->retrieveEntrainements();
 
         $coachs = Coach::retrieveCoachsForDefaultClub();
 
         $categories = Category::retrieveCategoriesForDefaultClub();
 
         return view('entrainement.list')->with(compact('entrainements', 'coachs', 'categories'));
+    }
+    
+    public function api_index() {
+        
+        return $this->retrieveEntrainements();
+    }
+    
+    public function retrieveEntrainements() {
+        
+        $dateDebut = Carbon::now()->subDay(1);
+        
+        $dateFin = Carbon::now()->addWeek(2);
+        
+        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, $dateFin);
+        
+        return $entrainements;
     }
 
     public function show($id) {

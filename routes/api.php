@@ -19,4 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/players/search', 'PlayerController@search')->name('player.autocomplete.search');
 
-Route::get('/clubs/default', 'ClubController@default')->name('club.default');
+Route::get('/clubs/default', 'ClubController@default')->name('api.club.default');
+
+Route::get('/entrainements', 'EntrainementController@api_index')->name('api.entrainements');
+
+Route::get('/inscriptions', 'InscriptionController@api_index')->name('api.inscriptions');
+
+Route::get('/convocations', 'ConvocationController@api_index')->name('api.convocations');

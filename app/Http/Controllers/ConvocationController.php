@@ -15,17 +15,29 @@ class ConvocationController extends Controller
 {
     public function index() {
         
-        $dateDebut = Carbon::now()->subDay(1);
-        
-        $dateFin = Carbon::now()->addWeek(2);
-        
-        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin);
+        $convocations = $this->retrieveConvocations();
         
         $coachs = Coach::retrieveCoachsForDefaultClub();
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
         return view('convocation.list')->with(compact('convocations', 'coachs', 'categories'));
+    }
+    
+    public function api_index() {
+        
+        return $this->retrieveConvocations();
+    }
+    
+    public function retrieveConvocations() {
+        
+        $dateDebut = Carbon::now()->subDay(1);
+        
+        $dateFin = Carbon::now()->addWeek(2);
+        
+        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin);
+        
+        return $convocations;
     }
     
     public function show($id) {
