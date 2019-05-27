@@ -7,9 +7,6 @@
 	<h1>
 		{{ $club->name }} - Inscriptions à venir
 
-		<a class="btn btn-default" href="{{ route('inscription.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une inscription</a>
-
-
 		<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             	{{ isset($selectedCategory) ? $selectedCategory->label : 'Filter par Categorie' }} <span class="caret"></span>
@@ -25,6 +22,10 @@
                 @endforeach
             </ul>
         </span>
+        
+        @auth
+        <a class="btn btn-default" href="{{ route('inscription.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une inscription</a>
+        @endauth
 	</h1>
 		
 @endsection
@@ -50,6 +51,9 @@
     			<th>Catégories</th>
     			<th>Date compétition</th>    			
     			<th>Libellé</th>
+    			@auth
+    				<th colspan="2">Actions</th>
+    			@endauth
     		</tr>
     	</thead>
     	<tbody>
@@ -60,19 +64,21 @@
     				<td>{{ $inscription->getJoinedCategories() }}</td>
         			<th><a href="{{ route('inscription', ['id' => $inscription->id]) }}">{{ $inscription->date_competition }}</a></th>
 					<td>{{ $inscription->libelle }}</td>
-					<td><a class="buttonLink" href="{{ route('inscription.edit', $inscription->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-					<td>
-						<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteInscriptionForm_{{ $inscription->id }}').submit();">
-							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-						</a>
-						<form id="deleteInscriptionForm_{{ $inscription->id }}" action="{{ route('inscription.delete', $inscription->id) }}" method="post">
-
-							<input type="hidden" name="_method" value="DELETE">
-
-							{{ csrf_field() }}
-
-						</form>
-					</td>
+					@auth
+    					<td><a class="buttonLink" href="{{ route('inscription.edit', $inscription->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+    					<td>
+    						<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteInscriptionForm_{{ $inscription->id }}').submit();">
+    							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    						</a>
+    						<form id="deleteInscriptionForm_{{ $inscription->id }}" action="{{ route('inscription.delete', $inscription->id) }}" method="post">
+    
+    							<input type="hidden" name="_method" value="DELETE">
+    
+    							{{ csrf_field() }}
+    
+    						</form>
+    					</td>
+					@endauth
 				</tr>
 
     		@endforeach

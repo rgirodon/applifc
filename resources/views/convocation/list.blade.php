@@ -40,7 +40,7 @@
         </span>
         
         @auth
-        	<a class="btn btn-default" href="{{ route('convocation.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer une convocation</a>
+        	<a class="btn btn-default" href="{{ route('convocation.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter une convocation</a>
         @endauth
 	</h1>
 		

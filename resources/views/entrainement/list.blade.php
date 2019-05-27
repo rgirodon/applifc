@@ -39,7 +39,7 @@
             </ul>
         </span>
         @auth
-            <a class="btn btn-default" href="{{ route('entrainement.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Créer un entrainement</a>
+            <a class="btn btn-default" href="{{ route('entrainement.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un entrainement</a>
         @endauth
     </h1>
 
