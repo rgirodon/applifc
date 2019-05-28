@@ -15,7 +15,7 @@ class EntrainementController extends Controller
 {
     public function index() {
 
-        $entrainements = $this->retrieveEntrainements();
+        $entrainements = $this->retrieveEntrainements(false, false);
 
         $coachs = Coach::retrieveCoachsForDefaultClub();
 
@@ -28,7 +28,7 @@ class EntrainementController extends Controller
 
         $entrainementsForJson = [];
         
-        $entrainements = $this->retrieveEntrainements();
+        $entrainements = $this->retrieveEntrainements(false, false);
         
         foreach ($entrainements as $entrainement) {
             
@@ -42,13 +42,13 @@ class EntrainementController extends Controller
         return response()->json($entrainementsForJson);
     }
     
-    public function retrieveEntrainements() {
+    public function retrieveEntrainements($coachId, $categoryId) {
         
         $dateDebut = Carbon::now()->subDay(1);
         
         $dateFin = Carbon::now()->addWeek(2);
         
-        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, $dateFin);
+        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, $dateFin, $coachId, $categoryId);
         
         return $entrainements;
     }
@@ -63,11 +63,7 @@ class EntrainementController extends Controller
 
     public function findByCoach($coachId) {
 
-        $dateDebut = Carbon::now()->subDay(1);
-
-        $dateFin = Carbon::now()->addWeek(2);
-
-        $entrainements = Entrainement::retrieveEntreprisesForDefaultClub($dateDebut, $dateFin, $coachId, false);
+        $entrainements = $this->retrieveEntrainements($coachId, false);
 
         $selectedCoach = Coach::find($coachId);
 
@@ -77,14 +73,28 @@ class EntrainementController extends Controller
 
         return view('entrainement.list')->with(compact('entrainements', 'coachs', 'selectedCoach', 'categories'));
     }
+    
+    public function api_findByCoach($coachId) {
+        
+        $entrainementsForJson = [];
+        
+        $entrainements = $this->retrieveEntrainements($coachId, false);
+        
+        foreach ($entrainements as $entrainement) {
+            
+            $entrainementsForJson[] = [
+                'date' => $entrainement->date_entrainement,
+                'categories' => $entrainement->getJoinedCategories(),
+                'coach' => $entrainement->coach->getFullName()
+            ];
+        }
+        
+        return response()->json($entrainementsForJson);
+    }
 
     public function findByCategory($categoryId) {
 
-        $dateDebut = Carbon::now()->subDay(1);
-
-        $dateFin = Carbon::now()->addWeek(2);
-
-        $entrainements = Entrainement::retrieveEntrainementsForDefaultClub($dateDebut, false, $categoryId);
+        $entrainements = $this->retrieveEntrainements(false, $categoryId);
 
         $coachs = Coach::retrieveCoachsForDefaultClub();
 
@@ -92,7 +102,25 @@ class EntrainementController extends Controller
 
         $selectedCategory = Category::find($categoryId);
 
-        return view('entrainement.liste')->with(compact('entrainements', 'coachs', 'categories', 'selectedCategory'));
+        return view('entrainement.list')->with(compact('entrainements', 'coachs', 'categories', 'selectedCategory'));
+    }
+    
+    public function api_findByCategory($categoryId) {
+        
+        $entrainementsForJson = [];
+        
+        $entrainements = $this->retrieveEntrainements(false, $categoryId);
+        
+        foreach ($entrainements as $entrainement) {
+            
+            $entrainementsForJson[] = [
+                'date' => $entrainement->date_entrainement,
+                'categories' => $entrainement->getJoinedCategories(),
+                'coach' => $entrainement->coach->getFullName()
+            ];
+        }
+        
+        return response()->json($entrainementsForJson);
     }
 
     public function destroy(Request $request, $id) {

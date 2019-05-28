@@ -17,7 +17,7 @@ class ConvocationController extends Controller
         
         $convocations = $this->retrieveConvocations();
         
-        $coachs = Coach::retrieveCoachsForDefaultClub();
+        $coachs = Coach::retrieveCoachsForDefaultClub(false, false);
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
@@ -26,20 +26,9 @@ class ConvocationController extends Controller
     
     public function api_index() {
                 
-        /*
-         * return {
-            fields: ['date',
-                    'categories',
-                    'coach',
-                    'heure_/_lieu',
-                    'description',
-                    'commentaires']
-        };
-         */
-        
         $convocationsForJson = [];
         
-        $convocations = $this->retrieveConvocations();
+        $convocations = $this->retrieveConvocations(false, false);
         
         foreach ($convocations as $convocation) {
             
@@ -56,13 +45,13 @@ class ConvocationController extends Controller
         return response()->json($convocationsForJson);
     }
     
-    public function retrieveConvocations() {
+    public function retrieveConvocations($coachId, $categoryId) {
         
         $dateDebut = Carbon::now()->subDay(1);
         
         $dateFin = Carbon::now()->addWeek(2);
         
-        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin);
+        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId, $categoryId);
         
         return $convocations;
     }
@@ -77,11 +66,7 @@ class ConvocationController extends Controller
     
     public function findByCoach($coachId) {
         
-        $dateDebut = Carbon::now()->subDay(1);
-        
-        $dateFin = Carbon::now()->addWeek(2);
-        
-        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, $coachId, false);
+        $convocations = $this->retrieveConvocations($coachId, false);
         
         $selectedCoach = Coach::find($coachId);
         
@@ -92,13 +77,30 @@ class ConvocationController extends Controller
         return view('convocation.list')->with(compact('convocations', 'coachs', 'selectedCoach', 'categories'));
     }
     
+    public function api_findByCoach($coachId) {
+        
+        $convocationsForJson = [];
+        
+        $convocations = $this->retrieveConvocations($coachId, false);
+        
+        foreach ($convocations as $convocation) {
+            
+            $convocationsForJson[] = [
+                'date' => $convocation->date_convocation,
+                'categories' => $convocation->getJoinedCategories(),
+                'coach' => $convocation->coach->getFullName(),
+                'heure_/_lieu' => $convocation->heure_lieu,
+                'description' => $convocation->description,
+                'commentaires' => $convocation->comments
+            ];
+        }
+        
+        return response()->json($convocationsForJson);
+    }
+    
     public function findByCategory($categoryId) {
         
-        $dateDebut = Carbon::now()->subDay(1);
-        
-        $dateFin = Carbon::now()->addWeek(2);
-        
-        $convocations = Convocation::retrieveConvocationsForDefaultClub($dateDebut, $dateFin, false, $categoryId);
+        $convocations = $this->retrieveConvocations(false, $categoryId);
         
         $coachs = Coach::retrieveCoachsForDefaultClub();
         
@@ -107,6 +109,27 @@ class ConvocationController extends Controller
         $selectedCategory = Category::find($categoryId);
         
         return view('convocation.list')->with(compact('convocations', 'coachs', 'categories', 'selectedCategory'));
+    }
+    
+    public function api_findByCategory($categoryId) {
+        
+        $convocationsForJson = [];
+        
+        $convocations = $this->retrieveConvocations(false, $categoryId);
+        
+        foreach ($convocations as $convocation) {
+            
+            $convocationsForJson[] = [
+                'date' => $convocation->date_convocation,
+                'categories' => $convocation->getJoinedCategories(),
+                'coach' => $convocation->coach->getFullName(),
+                'heure_/_lieu' => $convocation->heure_lieu,
+                'description' => $convocation->description,
+                'commentaires' => $convocation->comments
+            ];
+        }
+        
+        return response()->json($convocationsForJson);
     }
     
     public function destroy(Request $request, $id) {

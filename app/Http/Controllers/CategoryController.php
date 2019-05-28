@@ -15,6 +15,11 @@ class CategoryController extends Controller
         return view('category.list')->with('categories', $categories);
     }
     
+    public function api_index() {
+        
+        return Category::retrieveCategoriesForDefaultClub();
+    }
+    
     public function edit($id) {
         
         $category = Category::find($id);

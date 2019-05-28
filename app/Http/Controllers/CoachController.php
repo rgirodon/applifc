@@ -11,10 +11,14 @@ class CoachController extends Controller
 {
     public function index()
     {
-
         $coachs = Coach::retrieveCoachsForDefaultClub();
 
         return view('coach.list')->with('coachs', $coachs);
+    }
+    
+    public function api_index() {
+        
+        return Coach::retrieveCoachsForDefaultClub();
     }
 
     public function show($id) {
