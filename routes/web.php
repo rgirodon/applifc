@@ -93,7 +93,7 @@ Route::delete('/invitations/{id}', 'InvitationController@destroy')->name('invita
 
 Route::get('/inscriptions', 'InscriptionController@index')->name('inscriptions');
 
-Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory')->middleware('auth');
+Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@findByCategory')->name('inscriptionsByCategory');
 
 Route::get('/inscriptions/{id}/edit', 'InscriptionController@edit')->name('inscription.edit')->middleware('auth');
 

@@ -16,7 +16,7 @@ class InscriptionController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
-        $inscriptions = $this->retrieveInscriptions();
+        $inscriptions = $this->retrieveInscriptions(false);
         
         return view('inscription.list')
                 ->with(compact('inscriptions', 'categories'));
@@ -26,7 +26,7 @@ class InscriptionController extends Controller
 
         $inscriptionsForJson = [];
         
-        $inscriptions = $this->retrieveInscriptions();
+        $inscriptions = $this->retrieveInscriptions(false);
         
         foreach ($inscriptions as $inscription) {
             
@@ -40,14 +40,28 @@ class InscriptionController extends Controller
         return response()->json($inscriptionsForJson);
     }
     
-    public function retrieveInscriptions() {
+    public function retrieveInscriptions($categoryId) {
         
         $inscriptions =  Inscription::where([
             ['date_competition', '>=', Carbon::now()->subDay(1)],
             ['club_id', '=', Club::findDefaultClubId()],
-        ])
-        ->orderBy('date_competition')
-        ->get();
+        ]);
+        
+        if ($categoryId) {
+            
+            $inscriptions = $inscriptions
+                                ->whereHas('categories',
+                                    
+                                    function ($query) use ($categoryId) {
+                                        
+                                        $query->where('categories.id', '=', $categoryId);
+                                    }
+                                );
+        }
+        
+        $inscriptions = $inscriptions
+                            ->orderBy('date_competition')
+                            ->get();
         
         return $inscriptions;
     }
@@ -58,21 +72,28 @@ class InscriptionController extends Controller
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
-        $inscriptions =  Inscription::where([
-            ['date_competition', '>=', Carbon::now()->subDay(1)]
-        ])
-        ->whereHas('categories',
-            
-            function ($query) use ($categoryId) {
-                
-                $query->where('categories.id', '=', $categoryId);
-            }
-        )
-        ->orderBy('date_competition')
-        ->get();
+        $inscriptions =  $this->retrieveInscriptions($categoryId);
         
         return view('inscription.list')
                 ->with(compact('inscriptions', 'categories', 'selectedCategory'));
+    }
+    
+    public function api_findByCategory($categoryId) {
+        
+        $inscriptionsForJson = [];
+        
+        $inscriptions = $this->retrieveInscriptions($categoryId);
+        
+        foreach ($inscriptions as $inscription) {
+            
+            $inscriptionsForJson[] = [
+                'date_competition' => $inscription->date_competition,
+                'categories' => $inscription->getJoinedCategories(),
+                'libelle' => $inscription->libelle
+            ];
+        }
+        
+        return response()->json($inscriptionsForJson);
     }
     
     public function show($id) {

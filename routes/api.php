@@ -27,6 +27,8 @@ Route::get('/entrainements/category/{categoryId}', 'EntrainementController@api_f
 
 Route::get('/entrainements', 'EntrainementController@api_index')->name('api.entrainements');
 
+Route::get('/inscriptions/category/{categoryId}', 'InscriptionController@api_findByCategory')->name('api.inscriptionsByCategory');
+
 Route::get('/inscriptions', 'InscriptionController@api_index')->name('api.inscriptions');
 
 Route::get('/convocations/coach/{coachId}', 'ConvocationController@api_findByCoach')->name('api.convocationsByCoach');

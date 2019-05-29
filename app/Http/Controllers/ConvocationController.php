@@ -15,9 +15,9 @@ class ConvocationController extends Controller
 {
     public function index() {
         
-        $convocations = $this->retrieveConvocations();
+        $convocations = $this->retrieveConvocations(false, false);
         
-        $coachs = Coach::retrieveCoachsForDefaultClub(false, false);
+        $coachs = Coach::retrieveCoachsForDefaultClub();
         
         $categories = Category::retrieveCategoriesForDefaultClub();
         
