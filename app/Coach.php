@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class Coach extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
     
     protected $table = 'coachs';
     
