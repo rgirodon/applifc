@@ -7,6 +7,10 @@ use Carbon\Carbon;
 
 class Player extends Model
 {
+    public function club() {
+        
+        return $this->belongsTo('App\Club');
+    }    
     
     public function licences() {
         
