@@ -102,7 +102,7 @@ class CoachController extends Controller
 
         $coach->email = $request->input('email');
 
-        $coach->password = env("DEFAULT_PASSWORD");
+        $coach->password = bcrypt(env("DEFAULT_PASSWORD"));
 
         $coach->save();
 

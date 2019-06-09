@@ -24,7 +24,7 @@ class PopulateYoungPlayersFromCsv extends Command
      *
      * @var string
      */
-    protected $description = 'Populate young players from csv files';
+    protected $description = 'Populate young players from csv file';
 
     /**
      * Create a new command instance.
