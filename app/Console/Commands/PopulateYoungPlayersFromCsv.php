@@ -10,21 +10,21 @@ use Carbon\Carbon;
 use App\Licence;
 use App\Category;
 
-class PopulatePlayersFromCsv extends Command
+class PopulateYoungPlayersFromCsv extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'applifc:players {file}';
+    protected $signature = 'applifc:young {file}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Populate players from csv files';
+    protected $description = 'Populate young players from csv files';
 
     /**
      * Create a new command instance.
