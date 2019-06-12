@@ -28,13 +28,10 @@ class Player extends Model
         
         return $currentLicence;
     }
-
-
+    
+    
     public function getFullName() {
 
         return $this->firstname.' '.$this->lastname;
     }
 }
-
-
-

@@ -36,13 +36,8 @@ Route::delete('/licences/{id}', 'LicenceController@destroy')->name('licence.dele
 Route::post('/licences/renew', 'LicenceController@renew')->name('licences.renew')->middleware('auth');
 Route::get('/licences/renew', 'LicenceController@renewDisplay')->name('licences.renewDisplay')->middleware('auth');
 Route::post('/licences/storeAll', 'LicenceController@storeAll')->name('licences.storeAll')->middleware('auth');
-Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory')->middleware('auth');;
-Route::get('/player/{id}', 'PlayerController@show')->name('player')->middleware('auth');
-Route::get('/players/create', 'PlayerController@create')->name('player.create')->middleware('auth');
-Route::post('/players', 'PlayerController@store')->name('player.store')->middleware('auth');
-Route::get('/players/{id}/edit', 'PlayerController@edit')->name('player.edit')->middleware('auth');
-Route::put('/players/{id}', 'PlayerController@update')->name('player.update')->middleware('auth');
-Route::delete('/players/{id}', 'PlayerController@destroy')->name('player.delete')->middleware('auth');
+Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory')->middleware('auth');
+Route::get('/players/{id}', 'PlayerController@show')->name('player')->middleware('auth');
 Route::get('/convocations', 'ConvocationController@index')->name('convocations');
 Route::get('/convocations/create', 'ConvocationController@create')->name('convocation.create')->middleware('auth');
 Route::post('/convocations', 'ConvocationController@store')->name('convocation.store')->middleware('auth');
