@@ -5,8 +5,11 @@
 @section('header')
 	
 	<h1>
+
 		{{ $club->name }} - Licences
-	
+
+
+		<a class="btn btn-default" href="{{ route('player.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un joueur</a>
     	<span class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
             	{{ isset($selectedCategory) ? $selectedCategory->label : 'Filter par Categorie' }} <span class="caret"></span>
@@ -24,6 +27,7 @@
         </span>
         
         @if(isset($selectedCategory))
+
         
         	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="$('#renewLicencesForm').submit();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Renouveler les licenses sélectionnées</a>
         
@@ -38,6 +42,18 @@
     <div class="alert alert-success">
     	{{ session('renew_message_ok') }}            
     </div>
+@endif
+
+@if (session('delete_message_ok'))
+	<div class="alert alert-success">
+		{{ session('delete_message_ok') }}
+	</div>
+@endif
+
+@if (session('delete_message_ko'))
+	<div class="alert alert-danger">
+		{{ session('delete_message_ko') }}
+	</div>
 @endif
 
 @if(isset($selectedCategory))
@@ -90,8 +106,22 @@
         			<th>{{ $licence->category->label }}</th>
         			<td><a href="{{ route('player', ['id' => $licence->player->id]) }}">{{ $licence->player->lastname }}</a></td>
         			<td>{{ $licence->player->firstname }}</td>
+
+						<td><a class="buttonLink" href="{{ route('player.edit', $licence->player->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+						<td>
+							<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deletePlayerForm_{{ $licence->player->id  }}').submit();">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</a>
+							<form id="deletePlayerForm_{{ $licence->player->id  }}" action="{{ route('player.delete', $licence->player->id ) }}" method="post">
+
+								<input type="hidden" name="_method" value="DELETE">
+
+								{{ csrf_field() }}
+
+							</form>
+						</td>
         		</tr>
-    			
+
     		@endforeach
     	
     	</tbody>

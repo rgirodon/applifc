@@ -8,8 +8,6 @@ use App\Inscription;
 use Carbon\Carbon;
 use App\Club;
 
-
-
 class InscriptionController extends Controller
 {
     public function index() {
