@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Coach')
+@section('title', 'Player')
 
 @section('header')
 	
 	<h1>
-		{{ $club->name }} - {{ $coach->getFullName() }}
+		{{ $club->name }} - {{ $player->getFullName() }}
 	</h1>
 		
 @endsection
@@ -18,13 +18,13 @@
 		<div class="panel-body">
 			<div class="media">
 				<div class="media-body">
-					<p>Nom : {{ $coach->lastname }}</p>
-					<p>Prénom : {{ $coach->firstname }}</p>
-					<p>E-mail : {{ $coach->email }}</p>
+					<p>Nom : {{ $player->lastname }}</p>
+					<p>Prénom : {{ $player->firstname }}</p>
+					<p>E-mail : {{ $player->email }}</p>
 				</div>
-				@if ($coach->photo)
+				@if ($player->photo)
 					<div class="media-right media-top">
-						<img src="/images/coachs/{{ $coach->photo }}">
+						<img src="/images/coachs/{{ $player->photo }}">
 					</div>
 				@endif
 			</div>
