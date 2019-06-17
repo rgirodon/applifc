@@ -56,6 +56,10 @@
                 	<input type="date" class="form-control" id="date_competition" name="date_competition" value="{{ old('date_competition') ? old('date_competition') : $invitation->date_competition }}">
               	</div>
               	<div class="form-group">
+                	<label for="duration">Durée</label>
+                	<input type="text" class="form-control" id="duration" name="duration" value="{{ old('duration') ? old('duration') : $invitation->duration }}">
+              	</div>
+              	<div class="form-group">
                 	<label for="date_limite_reponse">Date limite de réponse</label>
                 	<input type="date" class="form-control" id="date_limite_reponse" name="date_limite_reponse" value="{{ old('date_limite_reponse') ? old('date_limite_reponse') : $invitation->date_limite_reponse }}">
               	</div>

@@ -49,7 +49,8 @@
     	<thead>
     		<tr>
     			<th>Catégories</th>
-    			<th>Date compétition</th>    			
+    			<th>Date compétition</th>   
+    			<th>Durée</th> 			
     			<th>Date limite réponse</th>
     			<th>Libellé</th>
     			<th>Réponse</th>
@@ -65,6 +66,7 @@
     			<tr>
     				<td>{{ $invitation->getJoinedCategories() }}</td>
         			<th><a href="{{ route('invitation', ['id' => $invitation->id]) }}">{{ $invitation->date_competition }}</a></th>
+        			<td>{{ $invitation->duration }}</td>
         			<td>{{ $invitation->date_limite_reponse }}</td>
         			<td>{{ $invitation->libelle }}</td>
         			<td>{{ $invitation->reponseLabel() }}</td>

@@ -18,6 +18,7 @@
         <div class="panel-body"> 
             <p>Catégories : {{ $invitation->getJoinedCategories() }}</p>  
             <p>Date compétition : {{ $invitation->date_competition }}</p>
+            <p>Durée : {{ $invitation->duration }}</p>
            	<p>Libellé : {{ $invitation->libelle }}</p>
             <p>Date limite de réponse : {{ $invitation->date_limite_reponse }}</p>
             <p>Commentaires : {!! $invitation->comments !!}</p>

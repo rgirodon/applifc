@@ -101,6 +101,7 @@ class InvitationController extends Controller
             'date_competition' => 'bail|required|date',
             'date_limite_reponse' => 'bail|nullable|date',
             'libelle' => 'bail|required',
+            'duration' => 'bail|required',
         ]);
         
         $club = Club::findDefaultClub();
@@ -110,6 +111,8 @@ class InvitationController extends Controller
         $invitation->club()->associate($club);
         
         $invitation->date_competition = $request->input('date_competition');
+        
+        $invitation->duration = $request->input('duration');
         
         $invitation->date_limite_reponse = $request->input('date_limite_reponse');
         
@@ -146,11 +149,14 @@ class InvitationController extends Controller
             'date_competition' => 'bail|required|date',
             'date_limite_reponse' => 'bail|nullable|date',
             'libelle' => 'bail|required',
+            'duration' => 'bail|required',
         ]);
         
         $invitation = Invitation::find($id);
         
         $invitation->date_competition = $request->input('date_competition');
+        
+        $invitation->duration = $request->input('duration');
         
         $invitation->date_limite_reponse = $request->input('date_limite_reponse');
         
@@ -234,6 +240,8 @@ class InvitationController extends Controller
             $linkedInscription->invitation()->associate($invitation);
             
             $linkedInscription->date_competition = $invitation->date_competition;
+            
+            $linkedInscription->duration = $invitation->duration;
             
             $linkedInscription->libelle = $invitation->libelle;
             
