@@ -23,11 +23,12 @@
                 <li><a href="{{ route('licencesByCategory', ['categoryId' => $category->id]) }}">{{ $category->label }}</a></li>
                 
                 @endforeach
+                
+                <li><a href="{{ route('licencesByCategory', ['categoryId' => -1]) }}">Joueurs sans licence active</a></li>
             </ul>
         </span>
         
-        @if(isset($selectedCategory))
-
+        @if(isset($selectedCategory) && ($selectedCategory->id != -1))
         
         	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="$('#renewLicencesForm').submit();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Renouveler les licenses sélectionnées</a>
         
@@ -71,7 +72,7 @@
 @endif
 
 <div>
-	@if(isset($selectedCategory))
+	@if(isset($selectedCategory) && ($selectedCategory->id != -1))
 	
 	<form id="renewLicencesForm" action="{{ route('licences.renew') }}" method="post">
 	
@@ -82,7 +83,7 @@
     <table class="table table-striped table-hover">
     	<thead>
     		<tr>
-    			@if(isset($selectedCategory))
+    			@if(isset($selectedCategory) && ($selectedCategory->id != -1))
     				
     				<th>Sélectionner</th>
     				
@@ -98,7 +99,7 @@
     		@foreach ($licences as $licence)
     			
     			<tr>
-    				@if(isset($selectedCategory))
+    				@if(isset($selectedCategory) && ($selectedCategory->id != -1))
     				
         				<td><input type="checkbox" name="playerIds[]" value="{{ $licence->player->id }}"></td>
         				

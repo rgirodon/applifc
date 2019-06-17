@@ -28,6 +28,15 @@ class Player extends Model
         
         return $currentLicence;
     }
+    
+    public function getCurrentLicenceLabel() {
+        
+        $currentLicence = $this->getCurrentLicence();
+        
+        $currentLicenceLabel = $currentLicence ? $currentLicence->label : 'Pas de licence active';
+        
+        return $currentLicenceLabel;
+    }
 
 
     public function getFullName() {

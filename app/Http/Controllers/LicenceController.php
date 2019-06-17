@@ -24,15 +24,64 @@ class LicenceController extends Controller
     }
     public function findByCategory($categoryId) {
 
-        $selectedCategory = Category::find($categoryId);
-
         $categories = Category::retrieveCategoriesForDefaultClub();
-
-        $licences =  Licence::where([
-            ['category_id', '=', $categoryId],
-            ['starts_at', '<=', Carbon::now()],
-            ['ends_at', '>', Carbon::now()],
-        ])->get();
+        
+        $selectedCategory = null;
+        
+        $licences = [];
+        
+        if ($categoryId != -1) {
+            
+            $selectedCategory = Category::find($categoryId);
+    
+            $licences =  Licence::where([
+                ['category_id', '=', $categoryId],
+                ['starts_at', '<=', Carbon::now()],
+                ['ends_at', '>', Carbon::now()],
+            ])->get();
+        }
+        else {            
+            $selectedCategory = new Category();
+            
+            $selectedCategory->id = -1;
+            
+            $selectedCategory->label = 'Joueurs sans licence active';
+            
+            $players = Player::whereDoesntHave('licences',
+                function ($query) {
+                    $query->where([
+                        ['starts_at', '<=', Carbon::now()],
+                        ['ends_at', '>', Carbon::now()],
+                        ['club_id', '=', Club::findDefaultClubId()],
+                    ]);
+                }
+            )
+            ->whereHas('licences',
+                function ($query) {
+                    $query->where([
+                        ['club_id', '=', Club::findDefaultClubId()],
+                    ]);
+                }
+            )
+            ->get();
+            
+            foreach ($players as $player) {
+                
+                $licence = new Licence();
+                
+                $category = new Category();
+                
+                $category->id = -1;
+                
+                $category->label = 'Joueurs sans licence active';
+                
+                $licence->category = $category;
+                
+                $licence->player = $player;
+                
+                $licences[] = $licence;
+            }
+        }
 
         return view('licence.list')
             ->with(compact('licences', 'categories', 'selectedCategory'));
@@ -116,10 +165,18 @@ class LicenceController extends Controller
     public function destroy(Request $request, $id) {
 
         $licence = Licence::find($id);
-
-        $licence->delete();
-
-        $request->session()->flash('delete_message_ok', 'Licence supprimée');
+        
+        $player = $licence->player;
+        
+        if (count($player->licences) == 1) {
+            
+            $request->session()->flash('delete_message_ko', 'Impossible de supprimer cette licence, ce joueur se retrouverait sans licence');
+        }
+        else {
+            $licence->delete();
+    
+            $request->session()->flash('delete_message_ok', 'Licence supprimée');
+        }
 
         return redirect()->route('player', $licence->player->id);
     }

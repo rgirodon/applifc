@@ -5,7 +5,7 @@
 @section('header')
 
     <h1>
-        {{ $club->name }} - {{ $player->getCurrentLicence()->category->label }} - {{ $player->getFullName() }}
+        {{ $club->name }} - {{ $player->getCurrentLicenceLabel() }} - {{ $player->getFullName() }}
     </h1>
 
 @endsection
@@ -17,6 +17,12 @@
             {{ session('delete_message_ok') }}
         </div>
     @endif
+    
+    @if (session('delete_message_ko'))
+        <div class="alert alert-danger">
+            {{ session('delete_message_ko') }}
+        </div>
+    @endif
 
     <main>
         <div class="panel panel-default">
@@ -24,7 +30,7 @@
             <div class="panel-body">
                 <div class="media">
                     <div class="media-body">
-                        <p>Catégorie : {{ $player->getCurrentLicence()->category->label }}</p>
+                        <p>Catégorie : {{ $player->getCurrentLicenceLabel() }}</p>
                         <p>Nom : {{ $player->lastname }}</p>
                         <p>Prénom : {{ $player->firstname }}</p>
                         <p>Date de naissance : {{ $player->birth }}</p>

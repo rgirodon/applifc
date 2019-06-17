@@ -26,7 +26,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Identité</div>
 			<div class="panel-body">
-				<p>Catégorie : {{ $player->getCurrentLicence()->category->label }}</p>
+				<p>Catégorie : {{ $player->getCurrentLicenceLabel() }}</p>
 				<p>Nom : {{ $player->lastname }}</p>
 				<p>Prénom : {{ $player->firstname }}</p>
 				<p>Date de naissance : {{ $player->birth }}</p>
