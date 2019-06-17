@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Player;
 use App\Note;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 class PlayerController extends Controller
 {
@@ -142,11 +143,18 @@ class PlayerController extends Controller
     public function search(Request $request) {
         
         $term = $request->input('term');
-        
-        // TODO check player has current licence in default club !
-        
+                
         $players = Player::where('firstname', 'like', '%'.$term.'%')
                             ->orWhere('lastname','like', '%'.$term.'%')
+                            ->whereHas('licences',                                
+                                function ($query) {                                    
+                                    $query->where([
+                                        ['starts_at', '<=', Carbon::now()],
+                                        ['ends_at', '>', Carbon::now()],
+                                        ['club_id', '=', Club::findDefaultClubId()],
+                                    ]);
+                                }
+                            )
                             ->get();
         
         $playersForJson = [];                    

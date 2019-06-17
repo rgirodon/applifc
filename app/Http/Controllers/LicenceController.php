@@ -17,8 +17,7 @@ class LicenceController extends Controller
             ['starts_at', '<=', Carbon::now()],
             ['ends_at', '>', Carbon::now()],
             ['club_id', '=', Club::findDefaultClubId()],
-        ])
-            ->get();
+        ])->get();
 
         return view('licence.list')
             ->with(compact('licences', 'categories'));
