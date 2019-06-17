@@ -30,6 +30,7 @@ class InscriptionController extends Controller
             
             $inscriptionsForJson[] = [
                 'date_competition' => $inscription->date_competition,
+                'duration' => $inscription->duration,
                 'categories' => $inscription->getJoinedCategories(),
                 'libelle' => $inscription->libelle
             ];
