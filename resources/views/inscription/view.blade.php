@@ -18,6 +18,7 @@
         <div class="panel-body"> 
             <p>Catégories : {{ $inscription->getJoinedCategories() }}</p>  
             <p>Date compétition : {{ $inscription->date_competition }}</p>
+            <p>Durée : {{ $inscription->duration }}</p>
            	<p>Libellé : {{ $inscription->libelle }}</p>
             <p>Commentaires : {!! $inscription->comments !!}</p>
         </div>

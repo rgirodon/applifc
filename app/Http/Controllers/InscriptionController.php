@@ -133,6 +133,7 @@ class InscriptionController extends Controller
             'categoryIds' => 'bail|required|array|min:1',
             'date_competition' => 'bail|required|date',
             'libelle' => 'bail|required',
+            'duration' => 'bail|required',
         ]);
 
         $club = Club::findDefaultClub();
@@ -142,6 +143,8 @@ class InscriptionController extends Controller
         $inscription->club()->associate($club);
 
         $inscription->date_competition = $request->input('date_competition');
+        
+        $inscription->duration = $request->input('duration');
 
         $inscription->libelle = $request->input('libelle');
 
@@ -176,11 +179,14 @@ class InscriptionController extends Controller
             'categoryIds' => 'bail|required|array|min:1',
             'date_competition' => 'bail|required|date',
             'libelle' => 'bail|required',
+            'duration' => 'bail|required',
         ]);
 
         $inscription = Inscription::find($id);
 
         $inscription->date_competition = $request->input('date_competition');
+        
+        $inscription->duration = $request->input('duration');
 
         $inscription->libelle = $request->input('libelle');
 

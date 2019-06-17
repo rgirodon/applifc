@@ -55,7 +55,10 @@
                 	<label for="date_competition">Date de la compétition</label>
                 	<input type="date" class="form-control" id="date_competition" name="date_competition" value="{{ old('date_competition') ? old('date_competition') : $inscription->date_competition }}">
               	</div>
-
+				<div class="form-group">
+                	<label for="duration">Durée</label>
+                	<input type="text" class="form-control" id="duration" name="duration" value="{{ old('duration') ? old('duration') : $inscription->duration }}">
+              	</div>
               	<div class="form-group">
                 	<label for="comments">Commentaires</label>
                 	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') ? old('comments') : $inscription->comments }}</textarea>

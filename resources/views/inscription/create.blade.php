@@ -47,9 +47,15 @@
                 	<label for="libelle">Libellé</label>
                 	<input type="text" class="form-control" id="libelle" name="libelle" value="{{ old('libelle') }}">
               	</div>
+              	
               	<div class="form-group">
                 	<label for="date_competition">Date de la compétition</label>
                 	<input type="date" class="form-control" id="date_competition" name="date_competition" value="{{ old('date_competition') }}">
+              	</div>
+              	
+              	<div class="form-group">
+                	<label for="duration">Durée</label>
+                	<input type="text" class="form-control" id="duration" name="duration" value="{{ old('duration') }}">
               	</div>
 
               	<div class="form-group">

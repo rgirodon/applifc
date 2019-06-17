@@ -49,7 +49,8 @@
     	<thead>
     		<tr>
     			<th>Catégories</th>
-    			<th>Date compétition</th>    			
+    			<th>Date compétition</th>    
+    			<th>Durée</th> 			
     			<th>Libellé</th>
     			@auth
     				<th colspan="2">Actions</th>
@@ -63,6 +64,7 @@
     			<tr>
     				<td>{{ $inscription->getJoinedCategories() }}</td>
         			<th><a href="{{ route('inscription', ['id' => $inscription->id]) }}">{{ $inscription->date_competition }}</a></th>
+        			<td>{{ $inscription->duration }}</td>
 					<td>{{ $inscription->libelle }}</td>
 					@auth
     					<td><a class="buttonLink" href="{{ route('inscription.edit', $inscription->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
