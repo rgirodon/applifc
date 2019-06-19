@@ -45,6 +45,39 @@
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') }}">
 				</div>
 
+
+					<div class="panel panel-default">
+						<div class="panel-heading">Photo</div>
+
+						<div class="panel-body">
+							<form action="{{ route('upload.store') }}" method="post" action="{{url('/uploadfile')}}" enctype="multipart/form-data">
+
+								{{ csrf_field() }}
+
+								<div class="form-group">
+									<label for="file">Choisie ta photo</label>
+									<input type="file" class="form-control" id="file" name="file">
+									@if(count($errors) > 0)
+										<div class="alert alert-danger">
+											Upload Validation Error <br><br>
+											<ul>
+												@foreach($errors->all() as $error)
+												<li>{{ $error }}</li>
+											</ul>
+											@endforeach
+										</div>
+										@endif
+										@if($message = Session::get('success'))
+										<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
+											<strong>{{ $message }}</strong>
+										@endif
+										</div>
+								<img src="/images/{{ Session::get('path') }}">
+
+						</div>
+					</div>
+
+
               	<a class="btn btn-default" href="{{ route('coachs') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
               	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
             </form>
