@@ -99,6 +99,7 @@ class Convocation extends Model
                                 ['date_convocation', '>=', $dateDebut],
                                 ['date_convocation', '<=', $dateFin]
                             ])
+                            ->orderBy('date_convocation', 'asc')
                             ->get();
         
         return $convocations;
