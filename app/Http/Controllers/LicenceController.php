@@ -14,10 +14,16 @@ class LicenceController extends Controller
         $categories = Category::retrieveCategoriesForDefaultClub();
 
         $licences =  Licence::where([
-            ['starts_at', '<=', Carbon::now()],
-            ['ends_at', '>', Carbon::now()],
-            ['club_id', '=', Club::findDefaultClubId()],
-        ])->get();
+            ['licences.starts_at', '<=', Carbon::now()],
+            ['licences.ends_at', '>', Carbon::now()],
+            ['licences.club_id', '=', Club::findDefaultClubId()],
+        ])
+        ->join('categories', 'licences.category_id', '=', 'categories.id')
+        ->join('players', 'licences.player_id', '=', 'players.id')
+        ->orderBy('categories.starts_at', 'desc')
+        ->orderBy('players.lastname')
+        ->orderBy('players.firstname')
+        ->get();
 
         return view('licence.list')
             ->with(compact('licences', 'categories'));
@@ -35,10 +41,16 @@ class LicenceController extends Controller
             $selectedCategory = Category::find($categoryId);
     
             $licences =  Licence::where([
-                ['category_id', '=', $categoryId],
-                ['starts_at', '<=', Carbon::now()],
-                ['ends_at', '>', Carbon::now()],
-            ])->get();
+                ['licences.category_id', '=', $categoryId],
+                ['licences.starts_at', '<=', Carbon::now()],
+                ['licences.ends_at', '>', Carbon::now()],
+            ])
+            ->join('categories', 'licences.category_id', '=', 'categories.id')
+            ->join('players', 'licences.player_id', '=', 'players.id')
+            ->orderBy('categories.starts_at', 'desc')
+            ->orderBy('players.lastname')
+            ->orderBy('players.firstname')
+            ->get();
         }
         else {            
             $selectedCategory = new Category();
@@ -63,6 +75,8 @@ class LicenceController extends Controller
                     ]);
                 }
             )
+            ->orderBy('lastname')
+            ->orderBy('firstname')
             ->get();
             
             foreach ($players as $player) {

@@ -21,7 +21,9 @@ class Category extends Model
                 
                 $query->where('id', '=', Club::findDefaultClubId());
             }
-        )->get();
+        )
+        ->orderBy('starts_at', 'desc')
+        ->get();
         
         return $categories;
     }
