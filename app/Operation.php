@@ -13,7 +13,7 @@ class Operation extends Model
     
     public function actions() {
         
-        return $this->hasMany('App\OperationAction');
+        return $this->hasMany('App\OperationAction')->join('players','operation_actions.player_id', '=', 'players.id')->orderBy('players.lastname')->orderBy('players.firstname');
     }
     
     public static function boot() {
