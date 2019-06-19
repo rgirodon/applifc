@@ -34,6 +34,7 @@
     		<tr>
     			<th>Prénom</th>
     			<th>Nom</th>
+    			<th>Email</th>
     			<th colspan="2">Actions</th>
     		</tr>
     	</thead>
@@ -42,7 +43,6 @@
     		@foreach ($coachs as $coach)
 
 				<tr>
-					<th>{{ $coach->club_id }}</th>
 					<td>{{ $coach->firstname }}</td>
 					<td><a href="{{ route('coach', ['id' => $coach->id]) }}">{{ $coach->lastname }}</a></td>
 					<td>{{ $coach->email }}</td>

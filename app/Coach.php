@@ -27,9 +27,12 @@ class Coach extends Authenticatable
                 
                 $query->where('id', '=', Club::findDefaultClubId());
             }
-            )->get();
+        )
+        ->orderBy('lastname')
+        ->orderBy('firstname')
+        ->get();
             
-            return $coachs;
+        return $coachs;
     }
     
     public function getFullName() {

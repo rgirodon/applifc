@@ -39,7 +39,9 @@ class Operation extends Model
                 
                 $query->where('id', '=', Club::findDefaultClubId());
             }
-        )->get();
+        )
+        ->orderBy('label')
+        ->get();
         
         return $operations;
     }
