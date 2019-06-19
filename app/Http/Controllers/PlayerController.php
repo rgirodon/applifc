@@ -24,7 +24,7 @@ class PlayerController extends Controller
                 $query->where('id', '=', $id);
             }
         )
-        ->orderBy('created_at')
+        ->orderBy('created_at', 'desc')
         ->get();
         
         return view('player.view')

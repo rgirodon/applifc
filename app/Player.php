@@ -14,7 +14,7 @@ class Player extends Model
     
     public function licences() {
         
-        return $this->hasMany('App\Licence');
+        return $this->hasMany('App\Licence')->orderBy('starts_at', 'desc');
     }
     
     
