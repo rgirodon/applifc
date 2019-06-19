@@ -18,7 +18,7 @@ class Entrainement extends Model
     
     public function players() {
         
-        return $this->belongsToMany('App\Player', 'entrainements_players');
+        return $this->belongsToMany('App\Player', 'entrainements_players')->orderBy('lastname')->orderBy('firstname');
     }
     
     public function categories() {

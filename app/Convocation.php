@@ -18,7 +18,7 @@ class Convocation extends Model
     
     public function players() {
         
-        return $this->belongsToMany('App\Player', 'convocations_players');
+        return $this->belongsToMany('App\Player', 'convocations_players')->orderBy('lastname')->orderBy('firstname');
     }
     
     public function categories() {
