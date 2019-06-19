@@ -99,6 +99,7 @@ class Entrainement extends Model
                                 ['date_entrainement', '>=', $dateDebut],
                                 ['date_entrainement', '<=', $dateFin]
                             ])
+                            ->orderBy('date_entrainement', 'asc')
                             ->get();
         
         return $entrainements;
