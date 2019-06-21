@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/players/search', 'PlayerController@search')->name('player.autocomplete.search');
 
+Route::get('/convocations/{convocationId}', 'ConvocationController@api_show')->name('api.convocation.show');
+
 Route::get('/clubs/default', 'ClubController@default')->name('api.club.default')->middleware('client');
 
 Route::get('/entrainements/coach/{coachId}', 'EntrainementController@api_findByCoach')->name('api.entrainementsByCoach')->middleware('client');

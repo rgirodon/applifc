@@ -70,9 +70,14 @@
     			<th>Heure / Lieu</th>
     			<th>Description</th>
     			<th>Commentaires</th>
+    			
+    			@guest
+    				<th>Actions</th>
+    			@endguest
+    			
     			@auth
-    				<th colspan="2">Actions</th>
-    			@endauth
+    				<th colspan="3">Actions</th>
+    			@endauth    			
     		</tr>
     	</thead>
     	<tbody>
@@ -87,7 +92,12 @@
         			<td>{{ $convocation->description }}</<td>        			
         			<td>{!! nl2br($convocation->comments) !!}</<td>
         			
+        			@guest
+        				<td><a class="buttonLink" href="javascript:void(0);" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="modal" data-target="#convocationPlayersModal" data-id="{{ $convocation->id }}"></span></a></td>
+        			@endguest
+        			
         			@auth
+        				<td><a class="buttonLink" href="javascript:void(0);" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="modal" data-target="#convocationPlayersModal"></span></a></td>
             			<td><a class="buttonLink" href="{{ route('convocation.edit', $convocation->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
             			<td>
             				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteConvocationForm_{{ $convocation->id }}').submit();">
@@ -109,5 +119,41 @@
     	</tbody>
     </table>
 </div>
+
+<div class="modal fade" id="convocationPlayersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Joueurs convoqués</h4>
+      </div>
+      <div class="modal-body">
+        <ul id="convocationPlayersList">
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#convocationPlayersModal').on('show.bs.modal', function(e) {
+
+	console.log('Show convocation players modal : ' +  e.relatedTarget.getAttribute('data-id'));
+
+	$.get( '/api/convocations/' + e.relatedTarget.getAttribute('data-id'), function( data ) {
+
+		$( "#convocationPlayersList" ).html("");
+		
+		data.players.forEach(
+			function (item) {
+				$( "#convocationPlayersList" ).append('<li>' + item.firstname + ' ' + item.lastname + '</li>' );
+			}
+		);
+	});
+})
+</script>
 
 @endsection

@@ -64,6 +64,13 @@ class ConvocationController extends Controller
                 ->with(compact('convocation'));
     }
     
+    public function api_show($convocationId) {
+        
+        $convocation = Convocation::find($convocationId);
+        
+        return $convocation;
+    }
+    
     public function findByCoach($coachId) {
         
         $convocations = $this->retrieveConvocations($coachId, false);

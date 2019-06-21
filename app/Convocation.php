@@ -46,6 +46,8 @@ class Convocation extends Model
         ->implode('label', ' ');
     }
     
+    protected $with = array('players');
+    
     public function isForCategory($categoryId) {
         
         $result = false;
