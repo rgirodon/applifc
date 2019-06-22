@@ -33,6 +33,7 @@ class ConvocationController extends Controller
         foreach ($convocations as $convocation) {
             
             $convocationsForJson[] = [
+                'id' => $convocation->id,
                 'date' => $convocation->date_convocation,
                 'categories' => $convocation->getJoinedCategories(),
                 'coach' => $convocation->coach->getFullName(),
