@@ -51,7 +51,7 @@ class CoachController extends Controller
 
             $coach->delete();
 
-            Storage::delete($coach->photo);
+            Storage::disk('public_uploads')->delete('images/coachs/'.$coach->photo);
 
             $request->session()->flash('delete_message_ok', 'Coach supprimé');
         } catch (\Exception $exception) {
