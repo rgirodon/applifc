@@ -24,7 +24,7 @@
 
 	<main>
 
-		<form action="{{ route('player.store') }}" method="post">
+		<form action="{{ route('player.store') }}" method="post" enctype="multipart/form-data">>
 
 			{{ csrf_field() }}
 
@@ -77,6 +77,11 @@
 					<div class="form-group">
 						<label for="ends_at">Au</label>
 						<input type="date" class="form-control" id="ends_at" name="ends_at" value="{{ old('ends_at') }}">
+					</div>
+
+					<div class="form-group">
+						<label for="file">Photo</label>
+						<input type="file" class="form-control" id="file" name="file">
 					</div>
 
 				</div>

@@ -8,8 +8,8 @@ use App\Licence;
 use Illuminate\Http\Request;
 use App\Player;
 use App\Note;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
-use Carbon\Carbon;
 
 class PlayerController extends Controller
 {
@@ -24,7 +24,7 @@ class PlayerController extends Controller
                 $query->where('id', '=', $id);
             }
         )
-        ->orderBy('created_at', 'desc')
+        ->orderBy('created_at')
         ->get();
         
         return view('player.view')
@@ -51,6 +51,19 @@ class PlayerController extends Controller
         ]);
 
         $player = Player::find($id);
+        $file = $request->file('file');
+
+        if($file) {
+
+            $photoFileName = $file->hashName();
+
+            Storage::disk('public_uploads')->delete('images/players/'.$player->photo);
+
+            $file->storeAs('images/players', $photoFileName, 'public_uploads');
+
+            $player->photo = $photoFileName;
+        }
+
 
         $player->firstname = $request->input('firstname');
 
@@ -87,6 +100,14 @@ class PlayerController extends Controller
 
         $player->birth = $request->input('birth');
 
+        $file = $request->file('file');
+        if ($file) {
+            $photoFileName = $file->hashName();
+
+            $file->storeAs('images/players', $photoFileName, 'public_uploads');
+
+            $player->photo = $photoFileName;
+        }
         $player->sex = 'h';
 
         $player->save();
@@ -143,18 +164,11 @@ class PlayerController extends Controller
     public function search(Request $request) {
         
         $term = $request->input('term');
-                
+        
+        // TODO check player has current licence in default club !
+        
         $players = Player::where('firstname', 'like', '%'.$term.'%')
                             ->orWhere('lastname','like', '%'.$term.'%')
-                            ->whereHas('licences',                                
-                                function ($query) {                                    
-                                    $query->where([
-                                        ['starts_at', '<=', Carbon::now()],
-                                        ['ends_at', '>', Carbon::now()],
-                                        ['club_id', '=', Club::findDefaultClubId()],
-                                    ]);
-                                }
-                            )
                             ->get();
         
         $playersForJson = [];                    

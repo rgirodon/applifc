@@ -163,8 +163,8 @@ Route::get('/password', 'CoachController@displayChangePassword')->name('password
 Route::put('/password', 'CoachController@changePassword')->name('password.change.store')->middleware('auth');
 
 
-Route::get('/upload','UploadFileController@index')->name('upload.show');
+//Route::get('/upload','UploadFileController@index')->name('upload.show');
 
-Route::post('/upload','UploadFileController@store')->name('upload.store');
+//Route::post('/upload','UploadFileController@store')->name('upload.store');//
 
-Route::post('uploadfile','UploadfileController@upload');
+//Route::post('uploadfile','UploadfileController@upload');//
