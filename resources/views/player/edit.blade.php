@@ -29,7 +29,7 @@
 		<div class="panel-heading">Joueur</div>
 		
         <div class="panel-body"> 
-            <form action="{{ route('player.update', $player->id) }}" method="post">
+            <form action="{{ route('player.update', $player->id) }}" method="post"  enctype="multipart/form-data">
             
             	{{ csrf_field() }}
             
@@ -50,6 +50,10 @@
 					<input type="date" class="form-control" id="birth" name="birth" value="{{ old('birth') ? old('birth') : $player->birth }}">
 				</div>
 
+				<div class="form-group">
+					<label for="file">Photo</label>
+					<input type="file" class="form-control" id="file" name="file">
+				</div>
 				<a class="btn btn-default" href="{{ route('licences') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
 
 				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>

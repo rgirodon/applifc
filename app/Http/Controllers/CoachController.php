@@ -5,6 +5,7 @@ use App\Category;
 use App\Coach;
 use App\Club;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
 
 class CoachController extends Controller
@@ -50,6 +51,8 @@ class CoachController extends Controller
 
             $coach->delete();
 
+            Storage::disk('public_uploads')->delete('images/coachs/'.$coach->photo);
+
             $request->session()->flash('delete_message_ok', 'Coach supprimé');
         } catch (\Exception $exception) {
 
@@ -69,6 +72,19 @@ class CoachController extends Controller
         ]);
 
         $coach = Coach::find($id);
+
+        $file = $request->file('file');
+
+        if($file) {
+
+            $photoFileName = $file->hashName();
+
+            Storage::disk('public_uploads')->delete('images/coachs/'.$coach->photo);
+
+            $file->storeAs('images/coachs', $photoFileName, 'public_uploads');
+
+            $coach->photo = $photoFileName;
+        }
 
         $coach->firstname = $request->input('firstname');
 
@@ -101,6 +117,17 @@ class CoachController extends Controller
         $coach->lastname = $request->input('lastname');
 
         $coach->email = $request->input('email');
+
+        $file = $request->file('file');
+
+        if ($file) {
+
+            $photoFileName = $file->hashName();
+
+            $file->storeAs('images/coachs', $photoFileName, 'public_uploads');
+
+            $coach->photo = $photoFileName;
+        }
 
         $coach->password = bcrypt(env("DEFAULT_PASSWORD"));
 

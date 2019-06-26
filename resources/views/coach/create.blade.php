@@ -27,7 +27,7 @@
 		<div class="panel-heading">Coach</div>
 		
         <div class="panel-body"> 
-            <form action="{{ route('coach.store') }}" method="post">
+            <form action="{{ route('coach.store') }}" method="post" enctype="multipart/form-data">
             
             	{{ csrf_field() }}
 
@@ -43,6 +43,11 @@
 				<div class="form-group">
 					<label for="email">E-Mail</label>
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') }}">
+				</div>
+
+				<div class="form-group">
+					<label for="file">Photo</label>
+					<input type="file" class="form-control" id="file" name="file">
 				</div>
 
               	<a class="btn btn-default" href="{{ route('coachs') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
