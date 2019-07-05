@@ -51,7 +51,10 @@
                 	<input type="date" class="form-control" id="date_entrainement" name="date_entrainement" value="{{ old('date_entrainement') }}">
               	</div>
 
-
+				<div class="form-group">
+					<label for="heure_lieu">Heure / Lieu</label>
+					<input type="text" class="form-control" id="heure_lieu" name="heure_lieu" value="{{ old('heure_lieu') }}">
+				</div>
               	<div class="form-group">
                 	<label for="comments">Commentaires</label>
                 	<textarea class="form-control" rows="3" name="comments" id="comments">{{ old('comments') }}</textarea>

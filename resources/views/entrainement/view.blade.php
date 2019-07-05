@@ -20,6 +20,7 @@
                 <p>Séance planifiée par : {{ $entrainement->coach->getFullName() }}</p>
                 <p>Date : {{ $entrainement->date_entrainement }}</p>
                 <p>Commentaires : {!! nl2br($entrainement->comments) !!}</p>
+                <p>Heure / Lieu : {{ $entrainement->heure_lieu }}</p>
             </div>
         </div>
 

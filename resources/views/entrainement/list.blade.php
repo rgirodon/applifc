@@ -66,6 +66,7 @@
                 <th>Date</th>
                 <th>Catégories</th>
                 <th>Coach</th>
+                <th>Heure/Lieu</th>
             </tr>
             </thead>
             <tbody>
@@ -76,6 +77,7 @@
                     <th><a href="{{ route('entrainement', ['id' => $entrainement->id]) }}">{{ $entrainement->date_entrainement }}</a></th>
                     <td>{{ $entrainement->getJoinedCategories() }}</td>
                     <td>{{ $entrainement->coach->getFullName() }}</td>
+                    <td>{{ $entrainement->heure_lieu }}</<td>
 
                     @auth
                         <td><a class="buttonLink" href="{{ route('entrainement.edit', $entrainement->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
