@@ -39,6 +39,18 @@ class Coach extends Authenticatable
         
         return $this->firstname.' '.$this->lastname;
     }
+
+    public function isActive() {
+
+        $result = 'non';
+
+        if ($this->active) {
+
+            $result = 'oui';
+        }
+
+        return $result;
+    }
     
     public function sendPasswordResetNotification($token) {
         

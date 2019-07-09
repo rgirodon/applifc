@@ -21,6 +21,7 @@
 					<p>Nom : {{ $coach->lastname }}</p>
 					<p>Prénom : {{ $coach->firstname }}</p>
 					<p>E-mail : {{ $coach->email }}</p>
+					<p>Actif : {{ $coach->isActive() }}</p>
 				</div>
 				@if ($coach->photo)
 					<div class="media-right media-top">
