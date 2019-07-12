@@ -10,7 +10,6 @@
 		<a class="btn btn-default" href="{{ route('coach.create') }}" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un coach</a>
 	</h1>
 
-
 @endsection
 
 @section('content')
@@ -35,7 +34,9 @@
     			<th>Prénom</th>
     			<th>Nom</th>
     			<th>Email</th>
+				<th>Actif</th>
     			<th colspan="2">Actions</th>
+
     		</tr>
     	</thead>
     	<tbody>
@@ -46,6 +47,9 @@
 					<td>{{ $coach->firstname }}</td>
 					<td><a href="{{ route('coach', ['id' => $coach->id]) }}">{{ $coach->lastname }}</a></td>
 					<td>{{ $coach->email }}</td>
+					<td>{{ $coach->isActive() }}</td>
+
+
 					<td><a class="buttonLink" href="{{ route('coach.edit', $coach->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
 					<td>
 						<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteCoachForm_{{ $coach->id }}').submit();">

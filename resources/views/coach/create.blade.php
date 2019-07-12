@@ -40,6 +40,7 @@
                 	<input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname') }}">
               	</div>
 
+
 				<div class="form-group">
 					<label for="email">E-Mail</label>
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') }}">

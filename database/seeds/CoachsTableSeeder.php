@@ -23,6 +23,7 @@ class CoachsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'email' => 'ojurine@gmail.com',
                 'password' => bcrypt('password'),
+                'active' => 1,
                 
             ],
             [
@@ -34,6 +35,7 @@ class CoachsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'email' => 'sgagnaire@gmail.com',
                 'password' => bcrypt('password'),
+                'active' => 1,
             ],
             [
                 'id' => 3,
@@ -44,6 +46,7 @@ class CoachsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'email' => 'gliabeuf@gmail.com',
                 'password' => bcrypt('password'),
+               ' active' => 1,
             ],
             [
                 'id' => 4,
@@ -54,6 +57,7 @@ class CoachsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'email' => 'jcarvalho@gmail.com',
                 'password' => bcrypt('password'),
+                'active' => 1,
             ],
         ]);
     }

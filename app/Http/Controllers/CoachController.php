@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Category;
 use App\Coach;
@@ -69,6 +70,8 @@ class CoachController extends Controller
             'firstname' => 'bail|required|max:255',
             'lastname' => 'bail|required|max:255',
             'email' => 'bail|required|email',
+            'active' => 'bail|required'
+
         ]);
 
         $coach = Coach::find($id);
@@ -92,6 +95,8 @@ class CoachController extends Controller
 
         $coach->email = $request->input('email');
 
+        $coach->active = $request->input('active');
+
         $coach->save();
 
         return redirect()->route('coachs');
@@ -103,7 +108,7 @@ class CoachController extends Controller
         $request->validate([
             'firstname' => 'bail|required|max:255',
             'lastname' => 'bail|required|max:255',
-            'email' => 'bail|required|email',
+            'email' => 'bail|required|email'
         ]);
 
         $club = Club::findDefaultClub();
@@ -117,6 +122,8 @@ class CoachController extends Controller
         $coach->lastname = $request->input('lastname');
 
         $coach->email = $request->input('email');
+
+        $coach ->active = 1;
 
         $file = $request->file('file');
 

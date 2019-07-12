@@ -5,7 +5,6 @@
 @section('header')
 	
 	<h1>
-
 		{{ $club->name }} - Edition d'un Coach
 
 	</h1>
@@ -28,8 +27,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Coach</div>
 		
-        <div class="panel-body"> 
-            <form action="{{ route('coach.update', $coach->id) }}" method="post"  enctype="multipart/form-data">
+        <div class="panel-body">
+			<form action="{{ route('coach.update', $coach->id) }}" method="post"  enctype="multipart/form-data">
             
             	{{ csrf_field() }}
             
@@ -45,10 +44,25 @@
 					<input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname') ? old('lastname') : $coach->lastname }}">
 				</div>
 
+
 				<div class="form-group">
 					<label for="email">E-Mail</label>
 					<input type="mail" class="form-control" id="email" name="email" value="{{ old('email') ? old('email') : $coach->email }}">
 				</div>
+
+				<div class="form-group">
+					<label for="active">Actif</label>
+					<select class="form-control" id="active" name="active">
+
+						<option value="1" {{ old('active')
+                								? (old('active') == 1 ? 'selected' : '')
+                								: ($coach->active == 1 ? 'selected' : '') }}>oui</option>
+
+						<option value="0" {{ old('active')
+                								? (old('active') == 0 ? 'selected' : '')
+                								: ($coach->active == 0 ? 'selected' : '') }}>non</option>
+
+					</select>
 
 				<div class="form-group">
 					<label for="file">Photo</label>
@@ -58,7 +72,7 @@
 				<a class="btn btn-default" href="{{ route('coachs') }}" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Annuler</a>
 
 				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> OK</button>
-            </form>
+			</form>
         </div>
     </div>
 </main>
