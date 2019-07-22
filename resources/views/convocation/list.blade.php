@@ -97,7 +97,7 @@
         			@endguest
         			
         			@auth
-        				<td><a class="buttonLink" href="javascript:void(0);" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="modal" data-target="#convocationPlayersModal"></span></a></td>
+        				<td><a class="buttonLink" href="javascript:void(0);" role="button"><span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="modal" data-target="#convocationPlayersModal" data-id="{{ $convocation->id }}"></span></a></td>
             			<td><a class="buttonLink" href="{{ route('convocation.edit', $convocation->id) }}" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
             			<td>
             				<a class="buttonLink" href="javascript:void(0);" role="button" onclick="$('#deleteConvocationForm_{{ $convocation->id }}').submit();">
