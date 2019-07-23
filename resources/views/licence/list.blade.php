@@ -30,7 +30,7 @@
         
         @if(isset($selectedCategory) && ($selectedCategory->id != -1))
         
-        	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="$('#renewLicencesForm').submit();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Renouveler les licenses sélectionnées</a>
+        	<a class="btn btn-default" href="javascript:void(0);" role="button" onclick="$('input[name=_method]').val('POST');$('#renewLicencesForm').submit();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Renouveler les licenses sélectionnées</a>
         
         @endif
 	</h1>

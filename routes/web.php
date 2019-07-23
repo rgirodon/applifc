@@ -27,14 +27,14 @@ Route::put('/coachs/{id}', 'CoachController@update')->name('coach.update')->midd
 Route::delete('/coachs/{id}', 'CoachController@destroy')->name('coach.delete')->middleware('auth');
 Route::get('/coachs', 'CoachController@index')->name('coachs')->middleware('auth');
 Route::get('/coach/{id}', 'CoachController@show')->name('coach')->middleware('auth');
+Route::post('/licences/renew', 'LicenceController@renew')->name('licences.renew')->middleware('auth');
+Route::get('/licences/renew', 'LicenceController@renewDisplay')->name('licences.renewDisplay')->middleware('auth');
 Route::get('/licences', 'LicenceController@index')->name('licences')->middleware('auth');
 Route::get('/licences/{playerId}/create', 'LicenceController@create')->name('licence.create')->middleware('auth');
 Route::post('/licences', 'LicenceController@store')->name('licence.store')->middleware('auth');
 Route::get('/licences/{id}/edit', 'LicenceController@edit')->name('licence.edit')->middleware('auth');
 Route::put('/licences/{id}', 'LicenceController@update')->name('licence.update')->middleware('auth');
 Route::delete('/licences/{id}', 'LicenceController@destroy')->name('licence.delete')->middleware('auth');
-Route::post('/licences/renew', 'LicenceController@renew')->name('licences.renew')->middleware('auth');
-Route::get('/licences/renew', 'LicenceController@renewDisplay')->name('licences.renewDisplay')->middleware('auth');
 Route::post('/licences/storeAll', 'LicenceController@storeAll')->name('licences.storeAll')->middleware('auth');
 Route::get('/licences/category/{categoryId}', 'LicenceController@findByCategory')->name('licencesByCategory')->middleware('auth');;
 Route::get('/player/{id}', 'PlayerController@show')->name('player')->middleware('auth');
