@@ -149,7 +149,7 @@ class LicenceController extends Controller
                 ['player_id', '=', $playerId],
             ])->get();
 
-            if ($alreadyExistingLicences->isEmpty()) {
+            if ($this->canCreateLicence($alreadyExistingLicences, $categoryId)) {
 
                 $licence = new Licence();
 
@@ -223,7 +223,7 @@ class LicenceController extends Controller
             ['id', '!=', $id],
         ])->get();
 
-        if ($alreadyExistingLicences->isEmpty()) {
+        if ($this->canCreateLicence($alreadyExistingLicences, $request->input('category'))) {
 
             $category = Category::find($request->input('category'));
 
@@ -281,8 +281,8 @@ class LicenceController extends Controller
             ['player_id', '=', $player->id],
         ])->get();
 
-        if ($alreadyExistingLicences->isEmpty()) {
-
+        if ($this->canCreateLicence($alreadyExistingLicences, $request->input('category'))) {
+            
             $licence = new Licence();
 
             $licence->club()->associate($club);
@@ -312,5 +312,26 @@ class LicenceController extends Controller
         }
 
         return redirect()->route('player', $player->id);
+    }
+    
+    private function canCreateLicence($alreadyExistingLicences, $categoryId) {
+        
+        $createLicence = false;
+        
+        if ($alreadyExistingLicences->isEmpty()) {
+            
+            $createLicence = true;
+        }
+        else {
+            $category = Category::find($categoryId);
+            
+            if ($category->starts_at == null
+                && $category->ends_at == null) {
+                    
+                    $createLicence = true;
+                }
+        }
+        
+        return $createLicence;
     }
 }
